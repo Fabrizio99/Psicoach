@@ -1,3 +1,3 @@
 # Psicoach
 
-Web page using React, Redux & Sass.
+SPA using React, Redux & Sass.
