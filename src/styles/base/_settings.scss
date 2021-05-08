@@ -1,0 +1,42 @@
+/* 
+    GLOBAL CONFIGURATIONS
+*/
+
+/* ---------- COLORS ----------*/
+$primary: #7ACCF1;
+$lightBlue1: #52DDEF;
+$lightBlue2: #C7F8FF;
+$blue: #77B2E8;
+$purple1: #8396D6;
+$purple2: #9179BB;
+$greyText: #434343; 
+$grey1: #696F72; 
+$grey2: #A5A5A5; 
+$blueGreen: #3D96B9;
+
+/* ---------- FONT ----------*/
+@font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto/Roboto-Regular.ttf");
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto/Roboto-Italic.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto/Roboto-Light.ttf");
+    font-weight: lighter;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto/Roboto-LightItalic.ttf");
+    font-weight: lighter;
+    font-style: italic;
+}

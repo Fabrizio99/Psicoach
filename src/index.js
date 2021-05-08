@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PsichoApp } from './PsichoApp';
+import { PsicoachApp } from './PsicoachApp';
+import './styles/styles.scss';
 
 ReactDOM.render(
-  <PsichoApp/>,
+  <PsicoachApp/>,
   document.getElementById('root')
 );

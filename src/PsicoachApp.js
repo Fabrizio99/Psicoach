@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const PsichoApp = () => {
+export const PsicoachApp = () => {
     return (
         <div>
-            PsichoApp
+            <h1>Psicoach</h1>
         </div>
     )
 }
