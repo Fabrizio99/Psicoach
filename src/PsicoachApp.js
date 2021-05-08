@@ -1,9 +1,6 @@
 import React from 'react'
+import { AppRouter } from './routers/AppRouter'
 
 export const PsicoachApp = () => {
-    return (
-        <div>
-            <h1>Psicoach</h1>
-        </div>
-    )
+    return <AppRouter/>
 }
