@@ -1,0 +1,76 @@
+footer{
+    background-color: #98AFBA;
+}
+.footer-content{
+    background: rgba(28, 107, 176, 0.81);
+}
+.footer-content .center-content{
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+.footer__logo{
+    grid-column: span 2;
+}
+.info-group{
+    display: flex;
+    flex-direction: column;
+}
+.info-group__link{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: white;
+    margin-bottom: 2px;
+}
+.info-group__title,
+.contact-group__title{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 18px;
+    line-height: 23px;
+    color: white;
+    margin-bottom: 6px;
+}
+.contact-group{
+    display: flex;
+    flex-direction: column;
+}
+.contact-group__whatsapp{
+    display: flex;
+    align-items: center;
+}
+.contact-group__whatsapp img{
+    margin-right: 10px;
+}
+.contact-group__whatsapp__number{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: white;
+}
+.contact-group__media{
+    flex-basis: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.contact-group__media a{
+    margin-right: 18px;
+}
+.copyright-container{
+    text-align: center;
+}
+.copyright-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: white;
+    padding: 10px 0;
+}

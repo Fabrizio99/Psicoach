@@ -1,0 +1,15 @@
+.button{
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.button--primary{
+    background-color: $blue;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: white;
+}

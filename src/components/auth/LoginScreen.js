@@ -3,7 +3,7 @@ import React from 'react'
 export const LoginScreen = () => {
     return (
         <div>
-            login screensadsad
+            <h1>login</h1>
         </div>
     )
 }
