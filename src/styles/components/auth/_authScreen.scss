@@ -1,0 +1,87 @@
+.auth-screen{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Roboto';
+}
+.auth-content{
+    border: 1px solid #DBDBDB;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 35px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 80vw;
+    max-width: 450px;
+}
+.auth__title{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: $blue;
+    margin-bottom: 40px;
+}
+.auth__label{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: $greyText
+}
+.auth__input{
+    margin: 5px 0 15px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 8px 10px;
+}
+.auth__input:active,
+.auth__input:focus{
+    border: 2px solid $blue
+
+}
+.auth__forgot-pasword__link{
+    margin-top: 16px;
+    align-self: flex-end;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: $greyText;
+}
+.auth__forgot-password__login{
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.auth__not-acount{
+    align-self: flex-start;
+    display: flex;
+    margin-top: 20px;
+}
+.auth__not-acount__text,
+.auth__not-account__link{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+.auth__not-acount__text{
+    color: $greyText;
+}
+.auth__not-account__link{
+    margin-left: 5px;
+    color: $blue;
+}
