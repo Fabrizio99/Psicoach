@@ -21,6 +21,7 @@ nav,
     display: flex;
 }
 .navbar__links-container{
+    display: none;
     margin-left: 70px;
 }
 .navbar__link,
@@ -38,11 +39,26 @@ nav,
     font-weight: bold;
     color: $blue;
 }
-
+.navbar-content__right{
+    display: flex;
+    align-items: center;
+}
+.navbar__menu__button{
+    margin-left: 20px;
+}
 
 @media(min-width : 992px){
+    .navbar-content__left{
+        display: flex;
+    }
     nav,
     .navbar-content{
         height: 90px;
+    }
+    .navbar__links-container{
+        display: flex;
+    }
+    .navbar__menu__button{
+        display: none;
     }
 }

@@ -1,10 +1,11 @@
 .button{
     border: 0;
-    padding: 10px 20px;
-    border-radius: 15px;
     cursor: pointer;
+    background-color: transparent;
 }
 .button--primary{
+    border-radius: 15px;
+    padding: 10px 20px;
     background-color: $blue;
     font-family: 'Roboto';
     font-style: normal;

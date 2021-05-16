@@ -1,0 +1,36 @@
+.menu{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(.22,.98,.67,1.01);
+}
+.menu.open{
+    transform: translateX(0);
+}
+.menu__close-button{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    border: 0;
+    background-color: transparent;
+}
+.menu-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.menu-content__link{
+    font-size: 24px;
+    font-weight: 500;
+    color: $blue;
+    margin-bottom: 20px;
+}

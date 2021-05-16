@@ -13,7 +13,7 @@ export const ArticleSection = () => {
                     Ver todos
                 </Link>
                 <div className="article-block outstanding">
-                    <img src={images('./article-image.png').default} className="article-block__image"/>
+                    <img src={images('./article-image.png').default} className="article-block__image" alt="article"/>
                     <div className="article-block__content">
                         <p className="article-block__title">El poder de la mente</p>
                         <p src="" className="article-block__description">
@@ -22,7 +22,7 @@ export const ArticleSection = () => {
                     </div>
                 </div>
                 <div className="article-block">
-                    <img src={images('./article-image.png').default} className="article-block__image"/>
+                    <img src={images('./article-image.png').default} className="article-block__image" alt="article"/>
                     <div className="article-block__content">
                         <p className="article-block__title">El poder de la mente</p>
                         <p src="" className="article-block__description">
@@ -31,7 +31,7 @@ export const ArticleSection = () => {
                     </div>
                 </div>
                 <div className="article-block">
-                    <img src={images('./article-image.png').default} className="article-block__image"/>
+                    <img src={images('./article-image.png').default} className="article-block__image" alt="article"/>
                     <div className="article-block__content">
                         <p className="article-block__title">El poder de la mente</p>
                         <p src="" className="article-block__description">
