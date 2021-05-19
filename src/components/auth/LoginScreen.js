@@ -1,22 +1,54 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { login } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm'
 
 export const LoginScreen = () => {
+    const dispatch = useDispatch();
+    const [form,handleInputChange] = useForm({
+        email:    '',
+        password: ''
+    });
+    const {email,password} = form;
+
+    const handleLogIn = (e)=>{
+        console.log(email,password);
+        dispatch(login(12345,'fabrizio'));
+    }
+
     return (
         <>
             <h2 className="auth__title">Iniciar Sesión</h2>
             <label className="auth__label">
                 Correo
-                <input type="text" name="email" autoComplete="off" className="auth__input"/>
+                <input 
+                    type="text" 
+                    name="email" 
+                    autoComplete="off" 
+                    className="auth__input"
+                    value={email}
+                    onChange={handleInputChange}
+                />
             </label>
             <label className="auth__label">
                 Contraseña
-                <input type="password" name="password" autoComplete="off" className="auth__input"/>
+                <input 
+                    type="password" 
+                    name="password" 
+                    autoComplete="off" 
+                    className="auth__input"
+                    value={password}
+                    onChange={handleInputChange}
+                />
             </label>
             <Link to="/auth/forgot-password" className="auth__forgot-pasword__link">
                 ¿Olvidaste tu contraseña?
             </Link>
-            <button className="button button--primary auth__forgot-password__login">
+            <button 
+                className="button button--primary auth__forgot-password__login"
+                onClick={handleLogIn}
+            >
                 Ingresar
             </button>
             <div className="auth__not-acount">
