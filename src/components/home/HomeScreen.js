@@ -10,15 +10,11 @@ import { StepsSection } from './StepsSection'
 export const HomeScreen = () => {
     return (
         <>
-            <Navbar/>
-            <div className="page-content">
-                <MainSection/>
-                <SlidesSection/>
-                <StepsSection/>
-                <PackagesSection/>
-                <ArticleSection/>
-            </div>
-            <Footer/>
+            <MainSection/>
+            <SlidesSection/>
+            <StepsSection/>
+            <PackagesSection/>
+            <ArticleSection/>
         </>
     )
 }

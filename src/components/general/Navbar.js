@@ -6,6 +6,7 @@ import { Menu } from './Menu'
 export const Navbar = () => {
     useEffect(() => {
         const menuButton = document.querySelectorAll('.menu-button');
+        const menuLinks  = document.querySelectorAll('.menu-content__link');
         const menuBlock  = document.getElementById('menuBlock');
         const html      = document.querySelector('html');
 
@@ -20,6 +21,13 @@ export const Navbar = () => {
                 html.style.overflow = menuBlock.classList.contains('open')?'hidden':'auto';
             }
         });
+
+        menuLinks.forEach(menuLink=>{
+            menuLink.addEventListener('click',function() {
+                menuBlock.classList.toggle('open');
+                html.style.overflow = menuBlock.classList.contains('open')?'hidden':'auto';
+            })
+        })
     }, [])
     return (
         <nav className="navbar">
