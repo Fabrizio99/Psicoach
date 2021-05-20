@@ -9,11 +9,12 @@ export const Navbar = () => {
         const menuLinks  = document.querySelectorAll('.menu-content__link');
         const menuBlock  = document.getElementById('menuBlock');
         const html      = document.querySelector('html');
-
-        menuButton.forEach(button=>button.addEventListener('click',_=>{
+        
+        const toggleMenu = _=>{
             menuBlock.classList.toggle('open');
             html.style.overflow = menuBlock.classList.contains('open')?'hidden':'auto';
-        }))
+        }
+        menuButton.forEach(button=>button.addEventListener('click',toggleMenu))
         
         window.addEventListener('resize',function(){
             if(window.matchMedia("(min-width: 992px)").matches && menuBlock.classList.contains('open')){
@@ -22,12 +23,9 @@ export const Navbar = () => {
             }
         });
 
-        menuLinks.forEach(menuLink=>{
-            menuLink.addEventListener('click',function() {
-                menuBlock.classList.toggle('open');
-                html.style.overflow = menuBlock.classList.contains('open')?'hidden':'auto';
-            })
-        })
+        document.querySelector('.menu-content').addEventListener('click',function(e) {
+            e.target.classList.contains('menu-content__link') && toggleMenu();
+        });
     }, [])
     return (
         <nav className="navbar">
