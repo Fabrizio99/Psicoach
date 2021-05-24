@@ -1,0 +1,33 @@
+.identity-section{
+    background-color: rgba(184, 226, 255, 0.35);
+    font-family: 'Noto Sans';
+    padding: 56px 0;
+}
+.identity-section__content{
+    display: flex;
+    & > *{
+        flex-basis: 100%;
+    }
+}
+.identity-section__block{
+    text-align: center;
+}
+.identity-section__block__content{
+    width: 70%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+.identity-section__block__title{
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 41px;
+    color: $purple1;
+    margin-bottom: 11px;
+}
+.identity-section__block__description{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: $greyText;
+}
