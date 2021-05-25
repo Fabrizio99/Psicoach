@@ -1,29 +1,28 @@
 import React from 'react'
+import { IdentityContent } from './IdentityContent'
 
 export const IdentitySection = () => {
+    const identityContent = [
+        {
+            title: 'Misión',
+            text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper viverra leo, vitae hendrerit turpis imperdiet quis. Nam cursus augue suscipit libero tempor lacinia. Vivamus fringilla auctor purus, quis cursus.'
+        },
+        {
+            title: 'Visión',
+            text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper viverra leo, vitae hendrerit turpis imperdiet quis. Nam cursus augue suscipit libero tempor lacinia. Vivamus fringilla auctor purus, quis cursus.'
+        }
+    ]
     return (
         <section className="identity-section">
             <div className="center-content identity-section__content">
-                <div className="identity-section__block">
-                    <div className="identity-section__block__content">
-                        <h5 className="identity-section__block__title">
-                            Misión
-                        </h5>
-                        <p className="identity-section__block__description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper viverra leo, vitae hendrerit turpis imperdiet quis. Nam cursus augue suscipit libero tempor lacinia. Vivamus fringilla auctor purus, quis cursus.
-                        </p>
-                    </div>
-                </div>
-                <div className="identity-section__block">
-                    <div className="identity-section__block__content">
-                        <h5 className="identity-section__block__title">
-                            Misión
-                        </h5>
-                        <p className="identity-section__block__description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper viverra leo, vitae hendrerit turpis imperdiet quis. Nam cursus augue suscipit libero tempor lacinia. Vivamus fringilla auctor purus, quis cursus.
-                        </p>
-                    </div>
-                </div>
+                {
+                    identityContent.map((content,index)=>(
+                        <IdentityContent
+                            {...content}
+                            key={index}
+                        />
+                    ))
+                }
             </div>
         </section>
     )

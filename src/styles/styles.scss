@@ -5,8 +5,11 @@
 @import './components/general/navbar';
 @import './components/general/footer';
 @import './components/general/menu';
+@import './components/general/userDropdown';
 @import './components/home/homeScreen';
 @import './components/us/usScreen';
 @import './components/us/aboutSection';
-@import './components/us/identityVision';
+@import './components/us/identitySection';
+@import './components/us/specialistSection';
 @import './components/auth/authScreen';
+@import 'sweetalert2/src/sweetalert2.scss';

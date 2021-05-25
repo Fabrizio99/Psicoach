@@ -1,19 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
+import { login } from "../actions/auth";
 import { GeneralScreen } from "../components/general/GeneralScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { ProfileScreen } from "../components/profile/ProfileScreen";
 import { UsScreen } from "../components/us/UsScreen";
+import { AppSettings } from "../util/AppSeetings";
 import { AuthRouter } from "./AuthRouter";
 import { PrivateRoute } from "./PrivateRoute";
 
 export const AppRouter = () => {
-  const isAuthenticated = false;
+
+  
+  const userData = useSelector(state=>state.auth);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+
+  // const isLoggedIn = false;
+
+  useEffect(() => {
+    if(localStorage.getItem(AppSettings.LOCAL_STORAGE.USER_DATA) && !Object.keys(userData).length){
+      dispatch(login(JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.USER_DATA))));
+    }
+
+    if(!!Object.keys(userData).length){
+      setIsLoggedIn(true);
+    }else{
+      setIsLoggedIn(false);    
+    }
+  }, [userData,isLoggedIn,dispatch])
+  
+
   return (
     <div>
       <Router>
@@ -27,13 +50,13 @@ export const AppRouter = () => {
           <Route
             path="/auth"
             component={(_) =>
-              !isAuthenticated ? <AuthRouter /> : <Redirect to="/" />
+              !isLoggedIn ? <AuthRouter /> : <Redirect to="/" />
             }
           />
           <PrivateRoute
             path="/profile"
             exact
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isLoggedIn}
             component={ProfileScreen}
           />
           <Redirect to="/" />
