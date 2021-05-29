@@ -16,7 +16,7 @@ export const AboutSection = () => {
                 <div className="about-section__right">
                     <img
                         className="about-section__image"
-                        alt="about-image"
+                        alt="about"
                         src={images('./about-image.png').default}
                     />
                 </div>

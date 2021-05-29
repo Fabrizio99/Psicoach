@@ -1,4 +1,3 @@
-import { store } from "../store/store";
 import { AppSettings } from "../util/AppSeetings";
 
 export const HttpRequest = {

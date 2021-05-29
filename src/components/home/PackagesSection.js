@@ -2,7 +2,6 @@ import React from 'react';
 import { PackageBlock } from './PackageBlock';
 
 export const PackagesSection = () => {
-    let swiper = null;
     const packages = [
         {
             name :            'REGULAR',

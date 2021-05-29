@@ -18,24 +18,40 @@ import { PrivateRoute } from "./PrivateRoute";
 export const AppRouter = () => {
 
   
-  const userData = useSelector(state=>state.auth);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [checking, setChecking] = useState(true);
   const dispatch = useDispatch();
-
+  
   // const isLoggedIn = false;
-
+  
+  const userData = useSelector(state=>state.auth);
   useEffect(() => {
+    console.log('useeffect');
     if(localStorage.getItem(AppSettings.LOCAL_STORAGE.USER_DATA) && !Object.keys(userData).length){
       dispatch(login(JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.USER_DATA))));
+      setIsLoggedIn(true);
     }
 
-    if(!!Object.keys(userData).length){
-      setIsLoggedIn(true);
-    }else{
-      setIsLoggedIn(false);    
-    }
-  }, [userData,isLoggedIn,dispatch])
+    // if(!!Object.keys(userData).length){
+    //   setIsLoggedIn(true);
+    // }else{
+    //   setIsLoggedIn(false);
+    // }
+    // console.log('login: ',isLoggedIn);
+    // console.log('checking: ',checking);
+    setChecking(false);
+  }, [userData,setIsLoggedIn,dispatch,checking])
   
+  console.log('----------------------------------------')
+  console.log('loggedin: ',isLoggedIn);
+
+  if(checking){
+    return (
+      <h1>Wait....</h1>
+    )
+  }
+
+  console.log('llego aca');
 
   return (
     <div>

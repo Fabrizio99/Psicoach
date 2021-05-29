@@ -3,8 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { Alerts } from '../../helpers/Alerts';
 import { HttpRequest } from '../../helpers/HttpRequest';
 import { useForm } from '../../hooks/useForm';
-import { AppSettings, Services } from '../../util/AppSeetings';
-const axios = require('axios');
+import { Services } from '../../util/AppSeetings';
 
 export const RegisterScreen = () => {
     const history = useHistory();
@@ -49,7 +48,6 @@ export const RegisterScreen = () => {
                     name="name" 
                     autoComplete="off" 
                     className="auth__input" 
-                    autoComplete="off"
                     onChange={handleInputChange}
                 />
             </label>
