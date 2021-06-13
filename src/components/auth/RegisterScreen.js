@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { Alerts } from '../../helpers/Alerts';
-import { HttpRequest } from '../../helpers/HttpRequest';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
-import { Services } from '../../util/AppSeetings';
+import { startRegister } from '../../actions/auth';
+import { disableRedirect } from '../../actions/redirect';
 
 export const RegisterScreen = () => {
-    const history = useHistory();
+    const {allowed, route} = useSelector(state=>state.redirect);
+    const dispatch = useDispatch();
     const [form,handleInputChange] = useForm({
         email    : '',
         password : '',
@@ -16,28 +17,13 @@ export const RegisterScreen = () => {
     const {email,password,name} = form;
 
     const handleRegister = async()=>{
-        const body = {
-            email,
-            password
-        }
-        name.trim() && (body.name = name);
-        
-        try {
-            const response = await HttpRequest.POST(Services.REGISTER,body);
-            console.log('respuesta register: ',response);
-            
-            if(response.errors){
-                Alerts.showErrorMessage(response.errors[0]?.message || '');
-                return;
-            }
-            Alerts.showSuccessMessage(response.message);
-            history.push('/auth');
-        } catch (error) {
-            console.log(error)
-        }
+        dispatch(startRegister(email,password,name));
     }
-
-
+    
+    if(allowed){
+        dispatch(disableRedirect())
+        return <Redirect to={route}/>
+    }
 
     return (
         <>

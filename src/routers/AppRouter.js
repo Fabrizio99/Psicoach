@@ -21,9 +21,10 @@ export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [checking, setChecking]     = useState(true);
   const dispatch                    = useDispatch();
-  const userData                    = useSelector(state=>state.auth);
+  const {auth}                      = useSelector(state=>state);
 
-  const  fetchProfile = token => HttpRequest.GET(Services.PROFILE,token);
+  const fetchProfile = token => HttpRequest.GET(Services.PROFILE,token);
+
 
   useEffect(() => {
     const token = localStorage.getItem(AppSettings.LOCAL_STORAGE.ID);
@@ -39,10 +40,8 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(userData.token && userData.profile){
-      setIsLoggedIn(true);
-    }
-  }, [userData])
+    setIsLoggedIn(auth.token && auth.profile);
+  }, [auth])
 
   
   if(checking){

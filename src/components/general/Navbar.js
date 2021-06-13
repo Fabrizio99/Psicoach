@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { logoutMiddleware } from '../../actions/auth';
 import { images } from '../../helpers/getImages';
 import { Menu } from './Menu'
 
 export const Navbar = () => {
-    const userData = useSelector(state=>state.auth);
+    const userData   = useSelector(state=>state.auth);
     const isLoggedIn = userData.token && userData.profile;
-    const html      = document.querySelector('html');
+    const html       = document.querySelector('html');
+    const dispatch   = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logoutMiddleware(userData.token));
+    }
 
     useEffect(() => {
         const menuButton = document.querySelectorAll('.menu-button');
@@ -36,7 +42,7 @@ export const Navbar = () => {
         //     document.querySelector('.menu-content').removeEventListener('click',handleMenuContent);
         //     menuButton.forEach(button=>button.removeEventListener('click',handleToggleMenu));
         // }
-    }, []);
+    }, [html.style]);
     
     useEffect(() => {
         if(!Object.keys(userData).length)   return;
@@ -61,7 +67,7 @@ export const Navbar = () => {
         //     html.removeEventListener('click',handleDropDown);
         //     dropdownToggle.removeEventListener('click',handleHideDropdown);
         // }
-    }, [userData])
+    }, [userData, html])
 
     return (
         <nav className="navbar">
@@ -102,7 +108,7 @@ export const Navbar = () => {
                                     <Link className="user-dropdown__item" to="/profile">
                                         Perfil
                                     </Link>
-                                    <div className="user-dropdown__item">
+                                    <div className="user-dropdown__item" onClick={handleLogout}>
                                         Salir
                                     </div>
                                 </div>

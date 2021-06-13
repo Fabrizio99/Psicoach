@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom'
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm'
 
 export const LoginScreen = () => {
-    const userData = useSelector(state=>state.auth);
+    const {auth} = useSelector(state=>state);
     const dispatch = useDispatch();
     const [form,handleInputChange] = useForm({
         email:    '',
@@ -13,7 +13,7 @@ export const LoginScreen = () => {
     });
     const {email,password} = form;
 
-    if(Object.keys(userData).length){
+    if(Object.keys(auth).length){
         return <Redirect to="/"/>
     }
 

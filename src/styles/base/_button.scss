@@ -13,4 +13,14 @@
     font-size: 16px;
     line-height: 19px;
     color: white;
+
+    &:disabled{
+        background-color: lighten($color: $blue, $amount: 15);
+    }
+    &:hover{
+        background-color: darken($color: $blue, $amount: 5);
+    }
+    &:active, &:focus{
+        background-color: darken($color: $blue, $amount: 10);
+    }
 }

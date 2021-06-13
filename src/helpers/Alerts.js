@@ -5,7 +5,8 @@ export const Alerts = {
         Swal.fire({
             icon : 'error',
             title: 'Error',
-            text : message
+            text : message,
+            confirmButtonColor: '#8396D6'
         })
     },
     showSuccessMessage(message){
