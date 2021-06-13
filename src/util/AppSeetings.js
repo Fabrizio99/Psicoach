@@ -1,7 +1,7 @@
 export const AppSettings = {
     END_POINT : 'https://psicouch-apiv2.herokuapp.com/',
     LOCAL_STORAGE : {
-        USER_DATA : 'user data'
+        ID : 'id'
     }
 }
 export const Services = {

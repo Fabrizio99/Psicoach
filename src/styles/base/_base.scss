@@ -10,21 +10,24 @@ a{
     text-decoration: none;
 }
 .page-content{
-    margin-top: 70px;
+    margin-top: 60px;
 }
 
 .center-content{
     margin: 0 auto;
     width: calc(100% - 40px);
-    max-width: 1200px;
+    max-width: 1148px;
+    padding: 3.125rem 0;
 }
 .title-section{
-    font-family: 'Lato';
+    font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 600;
     font-size: 2.125rem;
     line-height: 3rem;
     letter-spacing: 0.01em;
+    text-align: center;
+    margin-bottom: 30px;
     color: $blue;
 }
 html{
@@ -49,8 +52,9 @@ html{
     }
     .title-section{
         font-size: 2.5rem;
+        margin-bottom: 3.75rem;
     }
     .page-content{
-        margin-top: 90px;
+        margin-top: 70px;
     }
 }

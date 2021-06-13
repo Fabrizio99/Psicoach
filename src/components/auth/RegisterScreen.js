@@ -24,6 +24,7 @@ export const RegisterScreen = () => {
         
         try {
             const response = await HttpRequest.POST(Services.REGISTER,body);
+            console.log('respuesta register: ',response);
             
             if(response.errors){
                 Alerts.showErrorMessage(response.errors[0]?.message || '');

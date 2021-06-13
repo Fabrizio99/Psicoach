@@ -15,9 +15,10 @@ export const startLogin = (email,password)=>{
             }
 
             const {token} = response;
-            const userData = await HttpRequest.GET(Services.PROFILE,token);
-            localStorage.setItem(AppSettings.LOCAL_STORAGE.USER_DATA,JSON.stringify(userData));
-            dispatch(login(userData));
+            const profile = await HttpRequest.GET(Services.PROFILE,token);
+            
+            dispatch(login({token,profile}));
+            localStorage.setItem(AppSettings.LOCAL_STORAGE.ID,JSON.stringify(token));
         } catch (error) {
             Alerts.showErrorMessage('Ocurrió un error, vuelva a intentar');
         }

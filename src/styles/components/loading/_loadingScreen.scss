@@ -1,0 +1,21 @@
+.loading{
+    &__background{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__quote{
+        padding: 0 20px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Lato';
+        color: $blue;
+    }
+}
+@media(min-width : 768px){
+    .loading__quote{
+        padding: 0 30px;
+    }
+}

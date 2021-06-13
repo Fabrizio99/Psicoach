@@ -8,7 +8,7 @@ export const SpecialistSection = () => {
                 <h3 className="specialist-section__title">Nuestros especialistas</h3>
                 <div className="specialist-section__list">
                     <div className="specialist-block">
-                        <img src={images('./profile1-image.png').default} className="specialist-block__image" alt="specialist"/>
+                        <img src={images('./foto.png').default} className="specialist-block__image" alt="specialist"/>
                         <div className="specialist-block__information">
                             <h4 className="specialist-block__information__title">Dereck San Miguel Carhuas</h4>
                             <small className="specialist-block__information__job">CEO Psicoach en Vida</small>
@@ -18,7 +18,7 @@ export const SpecialistSection = () => {
                         </div>
                     </div>
                     <div className="specialist-block">
-                        <img src={images('./profile2-image.png').default} className="specialist-block__image" alt="specialist"/>
+                        <img src={images('./foto1.png').default} className="specialist-block__image" alt="specialist"/>
                         <div className="specialist-block__information">
                             <h4 className="specialist-block__information__title">Nataly Fortón Martinez</h4>
                             <small className="specialist-block__information__job">Practicante de Psicoach en Vida</small>

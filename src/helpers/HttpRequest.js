@@ -3,16 +3,16 @@ import { AppSettings } from "../util/AppSeetings";
 export const HttpRequest = {
   POST: async (url, data) => {
     const response = await fetch(url, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
+      method        : "POST",
+      mode          : "cors",
+      cache         : "no-cache",
+      credentials   : "same-origin",
+      headers       : {
         "Content-Type": "application/json",
       },
-      redirect: "follow",
+      redirect      : "follow",
       referrerPolicy: "no-referrer", //
-      body: JSON.stringify(data),
+      body          : JSON.stringify(data),
     });
     return await response.json();
   },
@@ -20,7 +20,7 @@ export const HttpRequest = {
     const response = await fetch(
       url,
       {
-        method: 'GET',
+        method : 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

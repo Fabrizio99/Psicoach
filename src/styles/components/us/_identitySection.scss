@@ -1,7 +1,7 @@
 .identity-section{
     background-color: rgba(184, 226, 255, 0.35);
     font-family: 'Noto Sans';
-    padding: 2.5rem 0;
+    padding-bottom: 0.3125rem;
 }
 .identity-section__content{
     display: flex;
@@ -39,9 +39,12 @@
     .identity-section__content{
         flex-direction: row;
     }
+    .identity-section__block:first-child{
+        margin-bottom: 0;
+    }
 }
 @media(min-width : 992px){
-    .identity-section{
-        padding: 3.5rem 0;
-    }
+    // .identity-section{
+    //     padding: 20px 0;
+    // }
 }

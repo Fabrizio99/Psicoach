@@ -9,49 +9,45 @@ import {
 import { login } from "../actions/auth";
 import { GeneralScreen } from "../components/general/GeneralScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
+import { LoadingScreen } from "../components/loading/LoadingScreen";
 import { ProfileScreen } from "../components/profile/ProfileScreen";
 import { UsScreen } from "../components/us/UsScreen";
-import { AppSettings } from "../util/AppSeetings";
+import { HttpRequest } from "../helpers/HttpRequest";
+import { AppSettings, Services } from "../util/AppSeetings";
 import { AuthRouter } from "./AuthRouter";
 import { PrivateRoute } from "./PrivateRoute";
 
 export const AppRouter = () => {
-
-  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [checking, setChecking] = useState(true);
-  const dispatch = useDispatch();
-  
-  // const isLoggedIn = false;
-  
-  const userData = useSelector(state=>state.auth);
+  const [checking, setChecking]     = useState(true);
+  const dispatch                    = useDispatch();
+  const userData                    = useSelector(state=>state.auth);
+
+  const  fetchProfile = token => HttpRequest.GET(Services.PROFILE,token);
+
   useEffect(() => {
-    console.log('useeffect');
-    if(localStorage.getItem(AppSettings.LOCAL_STORAGE.USER_DATA) && !Object.keys(userData).length){
-      dispatch(login(JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.USER_DATA))));
+    const token = localStorage.getItem(AppSettings.LOCAL_STORAGE.ID);
+    if(token){
+      fetchProfile(JSON.parse(token)).then(profile=>{
+        dispatch(login({token,profile}));
+        setIsLoggedIn(true);
+        setChecking(false);
+      })
+    }else{
+      setChecking(false);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if(userData.token && userData.profile){
       setIsLoggedIn(true);
     }
+  }, [userData])
 
-    // if(!!Object.keys(userData).length){
-    //   setIsLoggedIn(true);
-    // }else{
-    //   setIsLoggedIn(false);
-    // }
-    // console.log('login: ',isLoggedIn);
-    // console.log('checking: ',checking);
-    setChecking(false);
-  }, [userData,setIsLoggedIn,dispatch,checking])
   
-  console.log('----------------------------------------')
-  console.log('loggedin: ',isLoggedIn);
-
   if(checking){
-    return (
-      <h1>Wait....</h1>
-    )
+    return <LoadingScreen/>
   }
-
-  console.log('llego aca');
 
   return (
     <div>

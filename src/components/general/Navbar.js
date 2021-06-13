@@ -6,41 +6,66 @@ import { Menu } from './Menu'
 
 export const Navbar = () => {
     const userData = useSelector(state=>state.auth);
+    const isLoggedIn = userData.token && userData.profile;
+    const html      = document.querySelector('html');
 
     useEffect(() => {
         const menuButton = document.querySelectorAll('.menu-button');
         const menuBlock  = document.getElementById('menuBlock');
-        const html      = document.querySelector('html');
-        
-        const toggleMenu = _=>{
+
+        const handleToggleMenu  = _ => {
             menuBlock.classList.toggle('open');
             html.style.overflow = menuBlock.classList.contains('open')?'hidden':'auto';
         }
-        menuButton.forEach(button=>button.addEventListener('click',toggleMenu))
-        
-        window.addEventListener('resize',function(){
+        const handleResize      = _ => {
             if(window.matchMedia("(min-width: 992px)").matches && menuBlock.classList.contains('open')){
                 menuBlock.classList.remove('open');
                 html.style.overflow = menuBlock.classList.contains('open')?'hidden':'auto';
             }
-        });
+        }
+        const handleMenuContent = (e) => {
+            e.target.classList.contains('menu-content__link') && handleToggleMenu();
+        }
 
-        document.querySelector('.menu-content').addEventListener('click',function(e) {
-            e.target.classList.contains('menu-content__link') && toggleMenu();
-        });
+        window.addEventListener('resize',handleResize);
+        document.querySelector('.menu-content').addEventListener('click',handleMenuContent);
+        menuButton.forEach(button=>button.addEventListener('click',handleToggleMenu));
+        
+        // return () => {
+        //     window.removeEventListener('resize',handleResize);
+        //     document.querySelector('.menu-content').removeEventListener('click',handleMenuContent);
+        //     menuButton.forEach(button=>button.removeEventListener('click',handleToggleMenu));
+        // }
     }, []);
-
+    
     useEffect(() => {
         if(!Object.keys(userData).length)   return;
+
         const dropdownToggle = document.getElementById('dropdownToggle');
-        const dropdownMenu   = document.querySelector('.user-dropdown');
-        dropdownToggle.addEventListener('click',function() {
-            dropdownMenu.classList.toggle('dropdown-show');
-        })
+        const userDropdown   = document.querySelector('.user-dropdown');
+        const dropdownMenu   = document.getElementById('dropdownMenu');
+        
+        const handleDropDown = _=>{
+            userDropdown.classList.toggle('dropdown-show');
+        }
+        const handleHideDropdown = event=>{
+            if(dropdownMenu !== event.target && !dropdownMenu.contains(event.target) && (event.target !==  dropdownToggle && !dropdownToggle.contains(event.target))){
+                userDropdown.classList.remove('dropdown-show');
+            }
+        }
+
+        dropdownToggle.addEventListener('click',handleDropDown)
+        html.addEventListener('click',handleHideDropdown);
+
+        // return () => {
+        //     html.removeEventListener('click',handleDropDown);
+        //     dropdownToggle.removeEventListener('click',handleHideDropdown);
+        // }
     }, [userData])
 
     return (
         <nav className="navbar">
+            
             <div className="center-content navbar-content">
                 <div className="navbar-content__left">
                     <Link to="/">
@@ -60,17 +85,17 @@ export const Navbar = () => {
                 </div>
                 <div className="navbar-content__right">
                     {
-                        (!!Object.keys(userData).length) || (
+                        (!!isLoggedIn) || (
                             <Link to="/auth/login" className="navbar__user__link">
                                 Iniciar Sesión
                             </Link>
                         )
                     }
                     {
-                        (!!Object.keys(userData).length) && (
+                        (!!isLoggedIn) && (
                             <div className="user-dropdown">
                                 <div className="user-dropdown__toggle" id="dropdownToggle">
-                                    <p className="user-dropdown__user">{userData.name}</p>
+                                    <p className="user-dropdown__user">{userData.profile.name}</p>
                                     <img src={images('./arrow-icon.svg').default} className="user-dropdown__arrow" alt="arrow-profile"/>
                                 </div>
                                 <div className="user-dropdown__menu" id="dropdownMenu">
