@@ -36,7 +36,7 @@ export const startRegister = (email,password,name)=>{
             AppSettings.HTTP_VERBS.POST,
             Services.REGISTER,
             body,
-            async (response) => {
+            (response) => {
                 Alerts.showSuccessMessage(response.message);
                 dispatch(redirectTo('/auth'))
             }
@@ -50,7 +50,7 @@ export const logoutMiddleware = (token) => {
             AppSettings.HTTP_VERBS.DELETE,
             Services.LOG_OUT,
             token,
-            async _ => {
+             _ => {
                 localStorage.removeItem(AppSettings.LOCAL_STORAGE.ID)
                 dispatch(logout())
             }

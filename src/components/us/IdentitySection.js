@@ -5,11 +5,11 @@ export const IdentitySection = () => {
     const identityContent = [
         {
             title: 'Misión',
-            text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper viverra leo, vitae hendrerit turpis imperdiet quis. Nam cursus augue suscipit libero tempor lacinia. Vivamus fringilla auctor purus, quis cursus.'
+            text : 'Somos un centro psicólogico multidisciplinario que promueve, mejora y potencia el desarrollo personal y emocional del ser humano, garantizando un servicio personalizado con bases teóricas científicas que va de la mano con un trato humanístico'
         },
         {
             title: 'Visión',
-            text : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper viverra leo, vitae hendrerit turpis imperdiet quis. Nam cursus augue suscipit libero tempor lacinia. Vivamus fringilla auctor purus, quis cursus.'
+            text : 'Consolidarnos como la clínica psicológica multidisciplinaria líder de Lima y Provincia.'
         }
     ]
     return (
