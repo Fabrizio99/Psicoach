@@ -3,10 +3,9 @@ import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { startRegister } from '../../actions/auth';
-import { disableRedirect } from '../../actions/redirect';
 
 export const RegisterScreen = () => {
-    const {allowed, route} = useSelector(state=>state.redirect);
+    const {redirect: {allowed, route},loading} = useSelector(state=>state);
     const dispatch = useDispatch();
     const [form,handleInputChange] = useForm({
         email    : '',
@@ -19,9 +18,8 @@ export const RegisterScreen = () => {
     const handleRegister = async()=>{
         dispatch(startRegister(email,password,name));
     }
-    
+
     if(allowed){
-        dispatch(disableRedirect())
         return <Redirect to={route}/>
     }
 
@@ -61,6 +59,7 @@ export const RegisterScreen = () => {
             <button 
                 className="button button--primary auth__forgot-password__login"
                 onClick={handleRegister}
+                disabled={loading}
             >
                 Regístrate
             </button>

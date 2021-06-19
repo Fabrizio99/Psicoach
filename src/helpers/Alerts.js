@@ -9,11 +9,12 @@ export const Alerts = {
             confirmButtonColor: '#8396D6'
         })
     },
-    showSuccessMessage(message){
-        Swal.fire({
+    showSuccessMessage(message, dismissible=true){
+        return Swal.fire({
             icon : 'success',
             title: '',
-            text : message
+            text : message,
+            allowOutsideClick: dismissible
         })
     }
 }

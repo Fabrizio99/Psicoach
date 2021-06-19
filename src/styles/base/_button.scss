@@ -15,7 +15,8 @@
     color: white;
 
     &:disabled{
-        background-color: lighten($color: $blue, $amount: 15);
+        background-color: lighten($color: $blue, $amount: 15) !important;
+        cursor: default;
     }
     &:hover{
         background-color: darken($color: $blue, $amount: 5);

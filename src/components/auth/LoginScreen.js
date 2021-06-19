@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom'
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm'
+import { Modal } from '../general/Modal'
 
 export const LoginScreen = () => {
-    const {auth} = useSelector(state=>state);
+    const {auth, loading} = useSelector(state=>state);
     const dispatch = useDispatch();
     const [form,handleInputChange] = useForm({
         email:    '',
@@ -52,6 +53,7 @@ export const LoginScreen = () => {
             <button 
                 className="button button--primary auth__forgot-password__login"
                 onClick={handleLogIn}
+                disabled={loading}
             >
                 Ingresar
             </button>
@@ -63,6 +65,7 @@ export const LoginScreen = () => {
                     Registrate
                 </Link>
             </div>
+            <Modal/>
         </>
     )
 }

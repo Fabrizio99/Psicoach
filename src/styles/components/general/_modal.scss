@@ -1,0 +1,47 @@
+.modal{
+    position: absolute;
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0,0,0,.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__content{
+        padding: 35px 45px;
+        background-color: white;
+        min-width: 500px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title{
+        font-family: 'Noto Sans';
+        font-weight: 500;
+        line-height: 35px;
+        color: $blue;
+        margin-bottom: 35px;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    button{
+        margin-top: 10px;
+    }
+
+    .help-phrase{
+        font-size: 12px;
+        position: relative;
+        top: -12px;
+    }
+
+    .gif-content{
+
+        img{
+            width: 40px;
+        }
+    }
+}

@@ -7,6 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { login } from "../actions/auth";
+import { disableRedirect } from "../actions/redirect";
 import { GeneralScreen } from "../components/general/GeneralScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { LoadingScreen } from "../components/loading/LoadingScreen";
@@ -21,7 +22,7 @@ export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [checking, setChecking]     = useState(true);
   const dispatch                    = useDispatch();
-  const {auth}                      = useSelector(state=>state);
+  const {auth, redirect: {allowed}} = useSelector(state=>state);
 
   const fetchProfile = token => HttpRequest.GET(Services.PROFILE,token);
 
@@ -43,6 +44,11 @@ export const AppRouter = () => {
     setIsLoggedIn(auth.token && auth.profile);
   }, [auth])
 
+  useEffect(() => {
+    if(allowed){
+      dispatch(disableRedirect())
+    }  
+  }, [allowed,dispatch])
   
   if(checking){
     return <LoadingScreen/>
@@ -58,12 +64,7 @@ export const AppRouter = () => {
           <Route path="/" exact>
             <GeneralScreen component={HomeScreen} />
           </Route>
-          <Route
-            path="/auth"
-            component={(_) =>
-              !isLoggedIn ? <AuthRouter /> : <Redirect to="/" />
-            }
-          />
+          <Route path="/auth" render={() => !isLoggedIn ? <AuthRouter /> : <Redirect to="/" />} />
           <PrivateRoute
             path="/profile"
             exact

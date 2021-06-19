@@ -2,11 +2,13 @@ import { Alerts } from "../helpers/Alerts";
 import { handleWebServiceResponse, HttpRequest } from "../helpers/HttpRequest";
 import { types } from "../types/types"
 import { AppSettings, Services } from "../util/AppSeetings";
+import { finishLoading, startLoading } from "./loading";
 import { redirectTo } from "./redirect";
 
 
 export const startLogin = (email,password)=>{
     return async(dispatch)=>{
+        dispatch(startLoading())
         const body = {email,password}
 
         await handleWebServiceResponse(
@@ -19,6 +21,9 @@ export const startLogin = (email,password)=>{
                 
                 dispatch(login({token,profile}));
                 localStorage.setItem(AppSettings.LOCAL_STORAGE.ID,JSON.stringify(token));        
+            },
+            _ => {
+                dispatch(finishLoading())
             }
         )
     }
@@ -26,6 +31,7 @@ export const startLogin = (email,password)=>{
 
 export const startRegister = (email,password,name)=>{
     return async(dispatch)=>{
+        dispatch(startLoading())
         const body = {
             email,
             password
@@ -37,8 +43,13 @@ export const startRegister = (email,password,name)=>{
             Services.REGISTER,
             body,
             (response) => {
-                Alerts.showSuccessMessage(response.message);
-                dispatch(redirectTo('/auth'))
+                Alerts.showSuccessMessage(response.message,false)
+                    .then( resp => {
+                        dispatch(redirectTo('/auth'))
+                    })
+            },
+            _ => {
+                dispatch(finishLoading())
             }
         )
     }
