@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { login } from "../actions/auth";
 import { disableRedirect } from "../actions/redirect";
+import { Appointment } from "../components/appointment/Appointment";
 import { GeneralScreen } from "../components/general/GeneralScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { LoadingScreen } from "../components/loading/LoadingScreen";
@@ -60,6 +61,9 @@ export const AppRouter = () => {
         <Switch>
           <Route path="/us" exact>
             <GeneralScreen component={UsScreen} />
+          </Route>
+          <Route path="/appointment" exact>
+            <GeneralScreen component={Appointment} />
           </Route>
           <Route path="/" exact>
             <GeneralScreen component={HomeScreen} />
