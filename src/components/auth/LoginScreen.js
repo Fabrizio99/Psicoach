@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom'
+import { Input } from 'antd';
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm'
 import { Modal } from '../general/Modal'
@@ -22,30 +23,20 @@ export const LoginScreen = () => {
         dispatch(startLogin(email,password));
     }
 
+    const validForm = _ => {
+        return email?.trim() && password?.trim()
+    }
+
     return (
         <>
             <h2 className="auth__title">Iniciar Sesión</h2>
             <label className="auth__label">
-                Correo
-                <input 
-                    type="text" 
-                    name="email" 
-                    autoComplete="off" 
-                    className="auth__input"
-                    value={email}
-                    onChange={handleInputChange}
-                />
+                Correo *
+                <Input className="auth__input" name="email" onChange={handleInputChange} type="email" autoComplete="off" value={email}/>
             </label>
             <label className="auth__label">
-                Contraseña
-                <input 
-                    type="password" 
-                    name="password" 
-                    autoComplete="off" 
-                    className="auth__input"
-                    value={password}
-                    onChange={handleInputChange}
-                />
+                Contraseña *
+                <Input className="auth__input" name="password" onChange={handleInputChange} type="password" autoComplete="off" value={password}/>
             </label>
             <Link to="/auth/forgot-password" className="auth__forgot-pasword__link">
                 ¿Olvidaste tu contraseña?
@@ -53,7 +44,7 @@ export const LoginScreen = () => {
             <button 
                 className="button button--primary auth__forgot-password__login"
                 onClick={handleLogIn}
-                disabled={loading}
+                disabled={loading || !validForm()}
             >
                 Ingresar
             </button>

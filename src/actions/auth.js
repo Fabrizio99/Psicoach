@@ -29,12 +29,15 @@ export const startLogin = (email,password)=>{
     }
 }
 
-export const startRegister = (email,password,name)=>{
+export const startRegister = (email,password,name, question, answer, phrase)=>{
     return async(dispatch)=>{
         dispatch(startLoading())
         const body = {
             email,
-            password
+            password,
+            secret_question: question,
+            secret_response: answer,
+            help_phrase: phrase
         }
         name.trim() && (body.name = name);
 

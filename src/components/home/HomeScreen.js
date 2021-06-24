@@ -11,7 +11,7 @@ export const HomeScreen = () => {
             {/* <SlidesSection/> */}
             <StepsSection/>
             <PackagesSection/>
-            <ArticleSection/>
+            {/* <ArticleSection/> */}
         </>
     )
 }
