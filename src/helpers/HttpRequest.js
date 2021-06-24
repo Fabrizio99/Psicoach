@@ -17,15 +17,19 @@ export const handleWebServiceResponse = async (httpVerb, webService, body, onSuc
     const response = await HttpRequest[httpVerb](webService,body);
     if(response.errors){
         Alerts.showErrorMessage(response.errors[0]?.message || AppSettings.ERRORS.UNKNOWN);
-    }else if(response.errorHttp){
+        return false
+    }
+    if(response.errorHttp){
         Alerts.showErrorMessage(response.message);
-    }else{
-        await onSuccess(response)
-    }  
+        return false
+    }
+    await onSuccess(response)
     onFinally && onFinally()
+    return true
   } catch (error) {
     Alerts.showErrorMessage('Ocurrió un error, vuelva a intentar');
     onFinally && onFinally()
+    return false
   }
 }
 

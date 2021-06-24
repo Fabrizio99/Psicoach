@@ -1,74 +1,157 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {InputForm} from '../general/InputForm'
+import { useForm } from '../../hooks/useForm'
+import { recoverPassword } from "../../helpers/resetPassword";
+import PropTypes from 'prop-types';
+import { Alerts } from "../../helpers/Alerts";
+import { ModalManager } from "../../helpers/Modal";
 
-export const Modal = () => {
-  const [step, setStep] = useState(1);
+export const Modal = ({id}) => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [loading, setLoading] = useState(false)
+  const [helpPhrase, setHelpPhrase] = useState('')
+  const [form, handleInputChange, reset] = useForm({
+    email:    '',
+    word:    '',
+    password: '',
+    confirmPassword: ''
+  });
+  const {email, word, password, confirmPassword} = form;
 
-  const handleStepProcess = () => {
-    if (step === 3) {
-      return;
+  const handleStepProcess = async () => {
+    setLoading(true)
+    let form = {}
+    switch (currentStep) {
+      case 1:
+        form.email = email;
+        break;
+      case 2:
+        form.email = email;
+        form.response = word
+        break;
+      case 3:
+        form.email = email;
+        form.password = password;
+        break;
+      default:
+        break;
     }
-    setStep(step + 1);
+
+    const response = await recoverPassword(currentStep,form)
+    const phrase = response?.help_phrase
+    setHelpPhrase(phrase || '')
+
+    setLoading(false);
+
+    if(response){
+      if(currentStep<3){
+        setCurrentStep(currentStep + 1);
+        return
+      }
+
+      resetComponent()
+      ModalManager.closeModal(id);
+      Alerts.showSuccessMessage('Se cambio de manera exitosa')
+    }
   };
 
+  const resetComponent = _ => {
+    reset();
+    setCurrentStep(1);
+    setHelpPhrase('');
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    ModalManager.onClose( _ =>{
+      resetComponent()
+    })
+  }, [])
+
+  const formData = [
+    {
+      step: 1,
+      inputs: [
+        {
+          label: 'Ingrese su correo',
+          name: 'email',
+          type: 'email',
+          value: email
+        }
+      ],
+      textButton: 'Enviar'
+    },
+    {
+      step: 2,
+      inputs: [
+        {
+          label: 'Ingrese su palabra secreta',
+          name: 'word',
+          type: 'text',
+          value: word
+        }
+      ],
+      textButton: 'Enviar'
+    },
+    {
+      step: 3,
+      inputs: [
+        {
+          label: 'Ingrese su nueva contraseña',
+          name: 'password',
+          type: 'password',
+          value: password
+        },
+        {
+          label: 'Confirme su nueva contraseña',
+          name: 'confirmPassword',
+          type: 'password',
+          value: confirmPassword
+        }
+      ],
+      textButton: 'Reestablecer'
+    }
+  ]
+
+  const currentForm = formData.find(form => form.step === currentStep)
+
+  const validForm = _ => {
+    return currentForm.inputs.every(input => input.value) && (currentForm.step === 3?password === confirmPassword:true)
+  }
+
   return (
-    <div className="modal">
-      <div className="modal__content">
-        {step === 1 && (
-          <>
-            <h2 className="modal__title">Reestablecer contraseña</h2>
-            <label className="auth__label">
-              Ingrese su correo
-              <input
-                type="email"
-                name="email"
-                autoComplete="off"
-                className="auth__input"
-              />
-            </label>
-            <button
-              className="button button--primary"
-              onClick={(_) => handleStepProcess()}
-            >
-              Reestablecer
-            </button>
-          </>
-        )}
-        {step === 2 && (
-          <>
-            <h2 className="modal__title">Reestablecer contraseña</h2>
-            <label className="auth__label">
-              Ingrese su palabra secreta
-              <input type="text" autoComplete="off" className="auth__input" />
-              <small className="help-phrase">Lugar favorito</small>
-            </label>
-            <button
-              className="button button--primary"
-              onClick={(_) => handleStepProcess()}
-            >
-              Enviar
-            </button>
-          </>
-        )}
-        {step === 3 && (
-          <>
-            <h2 className="modal__title">Reestablecer contraseña</h2>
-            <label className="auth__label">
-              Ingrese su nueva contraseña
-              <input type="text" autoComplete="off" className="auth__input" />
-            </label>
-            <label className="auth__label">
-              Confirme su nueva contraseña
-              <input type="text" autoComplete="off" className="auth__input" />
-            </label>
-            <button
-              className="button button--primary"
-              onClick={(_) => handleStepProcess()}
-            >
-              Enviar
-            </button>
-          </>
-        )}
+    <div className="modal animate__animated animate__faster" id={id}>
+      <div className="modal__content animate__animated animate__faster">
+        <h2 className="modal__title">Reestablecer contraseña</h2>
+        {
+          currentForm.inputs.map((input,index) => (
+            <InputForm
+              onChange={handleInputChange}
+              value={input.value}
+              name={input.name}
+              type={input.type}
+              label={input.label}
+              key={index}
+            />
+          ))
+        }
+        {
+          helpPhrase && (
+            <small className="modal__phrase">Frase de ayuda: {helpPhrase}</small>
+          )
+        }
+        <button
+          className="button button--primary"
+          disabled={!validForm() || loading}
+          onClick={(_) => handleStepProcess()}
+        >
+          {currentForm.textButton}
+        </button>
       </div>
     </div>
   );
 };
+
+Modal.propTypes = {
+  id: PropTypes.string.isRequired
+}

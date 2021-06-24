@@ -6,7 +6,7 @@ export const Alerts = {
             icon : 'error',
             title: 'Error',
             text : message,
-            confirmButtonColor: '#8396D6'
+            confirmButtonColor: '#77B2E8'
         })
     },
     showSuccessMessage(message, dismissible=true){
@@ -14,7 +14,8 @@ export const Alerts = {
             icon : 'success',
             title: '',
             text : message,
-            allowOutsideClick: dismissible
+            allowOutsideClick: dismissible,
+            confirmButtonColor: '#77B2E8'
         })
     }
 }
