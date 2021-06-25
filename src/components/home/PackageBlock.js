@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export const PackageBlock = ({name,colorName,price,session,contentItemList}) => {
     return (
-        <div className="package-block">
+        <Link to="/appointment" className="package-block">
             <p className="package-block__name" style={{backgroundColor: colorName}}>
                 {name}
             </p>
@@ -23,7 +24,7 @@ export const PackageBlock = ({name,colorName,price,session,contentItemList}) => 
                 }
             </div>
 
-        </div>
+        </Link>
     )
 }
 PackageBlock.propTypes = {
