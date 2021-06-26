@@ -17,10 +17,11 @@ export const startLogin = (email,password)=>{
             body,
             async (response) => {
                 const {token} = response;
+                console.log('TIPO TOKEN: ', typeof token)
                 const profile = await HttpRequest.GET(Services.PROFILE,token);
                 
                 dispatch(login({token,profile}));
-                localStorage.setItem(AppSettings.LOCAL_STORAGE.ID,JSON.stringify(token));        
+                localStorage.setItem(AppSettings.LOCAL_STORAGE.ID,token);
             },
             _ => {
                 dispatch(finishLoading())
@@ -59,6 +60,8 @@ export const startRegister = (email,password,name, question, answer, phrase)=>{
 }
 
 export const logoutMiddleware = (token) => {
+    console.log('token: ', token)
+    console.log('token: ', "sdfsdf")
     return async (dispatch) => {
         await handleWebServiceResponse(
             AppSettings.HTTP_VERBS.DELETE,

@@ -2,26 +2,38 @@
     border: 0;
     cursor: pointer;
     background-color: transparent;
-}
-.button--primary{
-    border-radius: 15px;
-    padding: 10px 20px;
-    background-color: $blue;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
-    color: white;
 
-    &:disabled{
-        background-color: lighten($color: $blue, $amount: 15) !important;
-        cursor: default;
+    &--primary{
+        border-radius: 15px;
+        padding: 10px 20px;
+        background-color: $blue;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: white;
+    
+        &:disabled{
+            background-color: lighten($color: $blue, $amount: 15) !important;
+            cursor: default;
+        }
+        &:hover{
+            background-color: darken($color: $blue, $amount: 5);
+        }
+        &:active, &:focus{
+            background-color: darken($color: $blue, $amount: 10);
+        }
     }
-    &:hover{
-        background-color: darken($color: $blue, $amount: 5);
-    }
-    &:active, &:focus{
-        background-color: darken($color: $blue, $amount: 10);
+
+    &--calendar{
+        background-color: $blue;
+        color: white;
+        width: 100%;
+        position: relative;
+        top: 50%;
+        transform: translate(0, -80%);
+        border-radius: 8px;
+        padding: 8px 10px;
     }
 }

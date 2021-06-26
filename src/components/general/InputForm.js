@@ -1,20 +1,19 @@
 import React from 'react';
 import { Input } from 'antd';
 import PropTypes from 'prop-types';
+import '../../styles/components/general/_input.scss';
 
-export const InputForm = ({onChange, value, type, name, label}) => {
+export const InputForm = ({onChange, value, type, name, label, disabled=false}) => {
     return (
-        <label className="auth__label">
+        <label className="input__label">
             {label}
-            <Input className="auth__input" name={name} onChange={onChange} type={type} autoComplete="off" value={value}/>
+            <Input name={name} onChange={onChange} type={type} autoComplete="off" value={value} disabled={disabled}/>
         </label>
     )
 }
 
 InputForm.propTypes = {
-    onChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
 }

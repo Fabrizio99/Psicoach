@@ -30,8 +30,9 @@ export const AppRouter = () => {
 
   useEffect(() => {
     const token = localStorage.getItem(AppSettings.LOCAL_STORAGE.ID);
+    console.log(token)
     if(token){
-      fetchProfile(JSON.parse(token)).then(profile=>{
+      fetchProfile(token).then(profile=>{
         dispatch(login({token,profile}));
         setIsLoggedIn(true);
         setChecking(false);

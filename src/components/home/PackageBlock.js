@@ -23,7 +23,9 @@ export const PackageBlock = ({name,colorName,price,session,contentItemList}) => 
                     ))
                 }
             </div>
-
+            {/* <div className="package-block__buy-button">
+                +
+            </div> */}
         </Link>
     )
 }

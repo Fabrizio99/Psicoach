@@ -1,0 +1,43 @@
+@import '../../base/settings';
+
+.container{
+    &__title{
+        text-align: center;
+        font-family: 'Noto Sans';
+        font-style: normal;
+        font-size: 2.125rem;
+        line-height: 2.5rem;
+        color: $blue;
+        margin-bottom: 4rem;
+    }
+    &__description{
+        font-size: 1.125rem;
+    }
+    .personal .ant-card-head-title{
+        font-size: 20px;
+        color: $purple1;
+        font-weight: 500;
+        font-family: 'Noto Sans';
+    }
+    .personal .ant-card-type-inner .ant-card-head-title{
+        font-size: 16px;
+        color: $blue;
+    }
+    .row{
+        display: grid;
+    }
+    button{
+        border-radius: 5px !important;
+        width: 80%;
+        max-width: 200px;
+        margin: 70px auto !important;
+        font-size: 18px;
+        display: block;
+    }   
+}
+@media (min-width : 768px){
+    .row{
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+}
