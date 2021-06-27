@@ -1,16 +1,27 @@
 export const AppSettings = {
-    END_POINT : 'https://psicouch-apiv2.herokuapp.com/',
-    LOCAL_STORAGE : {
+    END_POINT: 'https://psicouch-apiv2.herokuapp.com/',
+    LOCAL_STORAGE: {
         ID : 'id'
     },
-    ERRORS : {
+    ERRORS: {
         UNKNOWN: 'Ocurrió un error, vuelva a intentar'
     },
-    HTTP_VERBS : {
+    HTTP_VERBS: {
         GET: 'GET',
         POST: 'POST',
         PUT: 'PUT',
         DELETE: 'DELETE'
+    },
+    TYPE_INPUTS: {
+        TEXT:     'text',
+        NUMBER:   'number',
+        EMAIL:    'email',
+        PASSWORD: 'password',
+        TEL:      'tel',
+        FILE:     'file'
+    },
+    TYPE_NUMBERS: {
+        AGE: 'age',
     }
 }
 export const Services = {

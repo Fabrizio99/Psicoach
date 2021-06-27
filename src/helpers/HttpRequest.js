@@ -17,10 +17,12 @@ export const handleWebServiceResponse = async (httpVerb, webService, body, onSuc
     const response = await HttpRequest[httpVerb](webService,body);
     if(response.errors){
         Alerts.showErrorMessage(response.errors[0]?.message || AppSettings.ERRORS.UNKNOWN);
+        onFinally && onFinally()
         return false
     }
     if(response.errorHttp){
         Alerts.showErrorMessage(response.message);
+        onFinally && onFinally()
         return false
     }
     await onSuccess(response)

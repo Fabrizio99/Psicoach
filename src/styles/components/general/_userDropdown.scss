@@ -25,15 +25,18 @@
 .user-dropdown__menu {
     display: none;
     position: absolute;
-    left: 0;
+    // left: 0;
     top: 100%;
-    width: 100%;
+    // width: 100%;
     background-color: white;
     padding: 5px 0px;
     border-radius: 4px;
     margin-top: 5px;
     box-shadow: 0 0 7px 1px #ddd;
     transition: display 0.3s ease-out;
+    width: max-content;
+    min-width: 150px;
+    right: 0;
 }
 .dropdown-show .user-dropdown__menu {
     display: block;

@@ -17,5 +17,14 @@ export const Alerts = {
             allowOutsideClick: dismissible,
             confirmButtonColor: '#77B2E8'
         })
+    },
+    showInfoMessage(message, title='Mensaje', dismissible){
+        return Swal.fire({
+            icon : 'info',
+            title,
+            text : message,
+            allowOutsideClick: dismissible,
+            confirmButtonColor: '#77B2E8'
+        })
     }
 }

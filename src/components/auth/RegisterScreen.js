@@ -45,7 +45,7 @@ export const RegisterScreen = () => {
             </label>
             <label className="auth__label">
                 Contraseña *
-                <Input className="auth__input" name="password" onChange={handleInputChange} type="text"/>
+                <Input className="auth__input" name="password" onChange={handleInputChange} type="password"/>
             </label>
             <label className="auth__label">
                 Pregunta Secreta *

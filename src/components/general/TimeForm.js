@@ -1,9 +1,7 @@
 import React from 'react'
 import { TimePicker } from 'antd';
 
-export const TimeForm = ({onChange, name, label, disabledHours,disabledMinutes}) => {
-    {/* <TimePicker defaultValue={moment('12:08', 'HH:mm')} format='HH:mm' showNow={false} inputReadOnly={true} disabledHours={handleDisableHours}/> */}
-
+export const TimeForm = ({onChange, name, label, disabledHours,disabledMinutes, disabled = false}) => {
     const handleChange = (time, timeString) => {
         onChange({
             target: {
@@ -18,6 +16,7 @@ export const TimeForm = ({onChange, name, label, disabledHours,disabledMinutes})
             {label}
             <TimePicker 
                 format='HH:mm' 
+                disabled={disabled}
                 showNow={false} 
                 inputReadOnly={true} 
                 onChange={handleChange} 

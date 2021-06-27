@@ -35,5 +35,25 @@
         transform: translate(0, -80%);
         border-radius: 8px;
         padding: 8px 10px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        span{
+            display: none;
+
+            @media(min-width : 768px){
+                &{
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    &--file{
+        &__text{
+            display: block;
+            margin-top: 2px;
+        }
     }
 }
