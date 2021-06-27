@@ -30,7 +30,6 @@ export const AppRouter = () => {
 
   useEffect(() => {
     const token = localStorage.getItem(AppSettings.LOCAL_STORAGE.ID);
-    console.log(token)
     if(token){
       fetchProfile(token).then(profile=>{
         dispatch(login({token,profile}));
@@ -63,7 +62,7 @@ export const AppRouter = () => {
           <Route path="/us" exact>
             <GeneralScreen component={UsScreen} />
           </Route>
-          <Route path="/appointment" exact>
+          <Route path="/appointment/:id">
             <GeneralScreen component={Appointment} />
           </Route>
           <Route path="/" exact>

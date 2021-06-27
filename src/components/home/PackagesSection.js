@@ -4,6 +4,7 @@ import { PackageBlock } from './PackageBlock';
 export const PackagesSection = () => {
     const packages = [
         {
+            id:               1,
             name :            'REGULAR',
             colorName:        '#F78490',
             price :           380,
@@ -13,6 +14,7 @@ export const PackagesSection = () => {
             ]
         },
         {
+            id:               2,
             name :            'MEDIUM',
             colorName:        '#FFE9CC',
             price :           360,
@@ -24,6 +26,7 @@ export const PackagesSection = () => {
             ]
         },
         {
+            id:               3,
             name :            'PREMIUM',
             colorName:        '#CEF0EA',
             price :           340,
@@ -37,6 +40,7 @@ export const PackagesSection = () => {
             ]
         },
         {
+            id:               4,
             name :            'LUXURY',
             colorName:        '#7ACCF1',
             price :           380,
@@ -59,7 +63,7 @@ export const PackagesSection = () => {
                         {
                             packages.map(p=>(
                                 <PackageBlock
-                                    key={p.name}
+                                    key={p.id}
                                     {...p}
                                 />
                             ))

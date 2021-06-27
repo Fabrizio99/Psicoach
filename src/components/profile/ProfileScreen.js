@@ -1,4 +1,3 @@
-import { Calendar } from 'antd'
 import React from 'react'
 import { CalendarComponent } from '../appointment/Calendar'
 

@@ -5,6 +5,7 @@ import { recoverPassword } from "../../helpers/resetPassword";
 import PropTypes from 'prop-types';
 import { Alerts } from "../../helpers/Alerts";
 import { ModalManager } from "../../helpers/Modal";
+import { AppSettings } from "../../util/AppSeetings";
 
 export const Modal = ({id}) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -75,7 +76,7 @@ export const Modal = ({id}) => {
         {
           label: 'Ingrese su correo',
           name: 'email',
-          type: 'email',
+          type: AppSettings.TYPE_INPUTS.EMAIL,
           value: email
         }
       ],
@@ -87,7 +88,7 @@ export const Modal = ({id}) => {
         {
           label: 'Ingrese su palabra secreta',
           name: 'word',
-          type: 'text',
+          type: AppSettings.TYPE_INPUTS.TEXT,
           value: word
         }
       ],
@@ -99,13 +100,13 @@ export const Modal = ({id}) => {
         {
           label: 'Ingrese su nueva contraseña',
           name: 'password',
-          type: 'password',
+          type: AppSettings.TYPE_INPUTS.PASSWORD,
           value: password
         },
         {
           label: 'Confirme su nueva contraseña',
           name: 'confirmPassword',
-          type: 'password',
+          type: AppSettings.TYPE_INPUTS.PASSWORD,
           value: confirmPassword
         }
       ],

@@ -10,13 +10,17 @@
         color: #434343;
         margin-bottom: 15px;
 
-        & > input, .ant-picker, .ant-select-selector{
+        & > input, .ant-picker, .ant-select-selector, .ant-input-number, .ant-input-password, .ant-btn{
             margin-top: 5px;
             padding: 8px 10px !important;
             height: 40px !important;
         }
-        .ant-select-selection-item, .ant-select-selection-placeholder{
+        .ant-select-selection-item, .ant-select-selection-placeholder, .ant-input-number-input{
             line-height: 22px !important;
+        }
+        .ant-input-number-input{
+            position: relative;
+            top: -3px;
         }
     }
 }

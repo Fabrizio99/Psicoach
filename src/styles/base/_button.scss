@@ -36,4 +36,11 @@
         border-radius: 8px;
         padding: 8px 10px;
     }
+
+    &--file{
+        &__text{
+            display: block;
+            margin-top: 2px;
+        }
+    }
 }
