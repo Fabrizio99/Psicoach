@@ -1,13 +1,6 @@
 import React from 'react';
 import { Calendar } from 'antd';
 import { Menu, Dropdown } from 'antd';
-// import 'antd/dist/antd.css';
-// import { ConfigProvider } from 'antd';
-// import esES from 'antd/lib/locale/es_ES';
-// import moment from 'moment';
-// import 'moment/locale/es';
-
-// moment.locale('es');
 
 export const CalendarComponent = () => {
     function getListData(value) {
@@ -48,7 +41,7 @@ export const CalendarComponent = () => {
             (
                 <Dropdown overlay={menu} placement="bottomLeft" className="dropdown-calendar">
                     <button className="button button--calendar">
-                        {listData.length} Cita(s)
+                        {listData.length} <span> Cita(s)</span>
                     </button>
                 </Dropdown>
             )

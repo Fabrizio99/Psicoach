@@ -62,9 +62,15 @@ export const AppRouter = () => {
           <Route path="/us" exact>
             <GeneralScreen component={UsScreen} />
           </Route>
-          <Route path="/appointment/:id">
+          <PrivateRoute
+            path="/appointment/:id"
+            exact
+            isAuthenticated={isLoggedIn}
+            component={Appointment}
+          />
+          {/* <Route path="/appointment/:id">
             <GeneralScreen component={Appointment} />
-          </Route>
+          </Route> */}
           <Route path="/" exact>
             <GeneralScreen component={HomeScreen} />
           </Route>

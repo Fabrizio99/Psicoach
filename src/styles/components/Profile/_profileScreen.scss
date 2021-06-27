@@ -1,67 +1,121 @@
 .profile{
     &__block{
-        
-        &:first-child{
-            display: flex;
-            align-items: center;
-        }
-
         &:last-child{
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            column-gap: 30px;
+            margin-top: 3.125rem;
         }
     }
     &__logo{
         font-family: 'Noto Sans';
         font-style: normal;
         font-weight: 500;
-        font-size: 100px;
-        line-height: 136px;
+        line-height: 8.5rem;
         color: white;
-        min-width: 200px;
-        width: 200px;
-        height: 200px;
         background: #77B2E8;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
-        margin: 0 60px 0 0;
+        margin: 0 3.75rem 0 0;
+        width: 6.25rem;
+        height: 6.25rem;
+        min-width: 6.25rem;
+        font-size: 3.125rem;
     }
     &__greeting{
         font-family: 'Noto Sans';
         font-style: normal;
         font-weight: 600;
-        font-size: 48px;
-        line-height: 65px;
+        font-size: 1.875rem;
+        line-height: 4.0625rem;
         color: $primary;
     }
     &__description{
-        font-size: 18px;
-        line-height: 21px;
+        font-size: 1rem;
+        line-height: 1.3125rem;
         color: $greyText;
     }
     &__card{
         background-color: $purple1;
-        border-radius: 5px;
-        padding: 10px 15px;
+        border-radius: 0.3125rem;
+        padding: 0.625rem 0.9375rem;
+        min-width: max-content;
+        width: 70%;
+        max-width: 250px;
         color: white;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         cursor: pointer;
-
+        
+        &:hover{
+            background-color: darken($color: $purple1, $amount: 5);
+        }
+        &:nth-child(2n){
+            background-color: $primary;
+            &:hover{
+                background-color: darken($color: $primary, $amount: 5);
+            }
+        }
         &__name{
             font-weight: bold;
-            font-size: 16px;
+            font-size: 1rem;
         }
 
         &__status{
-            font-size: 14px;
+            font-size: 0.875rem;
+        }
+    }
+
+    &__calendar, &__pending{
+        &__title{
+            font-size: 26px;
+            color: #434343;
+        }
+    }
+    
+    &__pending{
+        &__list{
+            padding-top: 0.75rem;
+        }
+    }
+}
+@media(min-width : 400px){
+    
+}
+@media(min-width : 768px){
+    .profile{
+        &__logo{
+            min-width: 12.5rem;
+            width: 12.5rem;
+            height: 12.5rem;
+            font-size: 6.25rem;
+        }
+        &__greeting{
+            font-size: 3rem;
+        }
+        &__description{
+            font-size: 1.125rem;
         }
 
-        &:hover{
-            background-color: darken($color: $purple1, $amount: 5);
+        &__calendar, &__pending{
+            &__title{
+                font-size: 30px;
+            }
+        }
+    }
+}
+@media(min-width : 992px){
+    .profile{
+        &__block{
+            &:first-child{
+                display: flex;
+                align-items: center;
+                font-size: 6.25rem;
+            }
+
+            &:last-child{
+                display: grid;
+                grid-template-columns: 7fr 3fr;
+                column-gap: 3.125rem;
+            }
         }
     }
 }

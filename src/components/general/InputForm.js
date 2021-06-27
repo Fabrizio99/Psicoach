@@ -22,8 +22,6 @@ export const InputForm = ({onChange, value, type, name, label, disabled=false, o
             return;
         }
 
-        console.log('paso acaaaa')
-        // const inputValue = e.target.value
         const inputValue = e
 
         if(!Number(inputValue) && inputValue) return

@@ -15,22 +15,24 @@ export const ProfileScreen = () => {
             </div>
             <div className="profile__block">
                 <div className="profile__calendar">
-                    <h4>Agenda</h4>
+                    <h4 className="profile__calendar__title">Agenda</h4>
                     <CalendarComponent/>
                 </div>
                 <div className="profile__pending">
-                    <h4>Citas/paquetes pendientes</h4>
-                    <div className="profile__card">
-                        <p className="profile__card__name">Paquete LUXURY</p>
-                        <p className="profile__card__status">
-                            Estado: Falta Pago
-                        </p>
-                    </div>
-                    <div className="profile__card">
-                        <p className="profile__card__name">Paquete DELUXE</p>
-                        <p className="profile__card__status">
-                            Estado: Procesando
-                        </p>
+                    <h4 className="profile__pending__title">Paquetes pendientes</h4>
+                    <div className="profile__pending__list">
+                        <div className="profile__card">
+                            <p className="profile__card__name">Paquete LUXURY</p>
+                            <p className="profile__card__status">
+                                Estado: Falta Pago
+                            </p>
+                        </div>
+                        <div className="profile__card">
+                            <p className="profile__card__name">Paquete DELUXE</p>
+                            <p className="profile__card__status">
+                                Estado: Procesando
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

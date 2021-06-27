@@ -34,7 +34,6 @@ export const Appointment = () => {
     const [appointmentList, setAppointmentList] = useState([])
 
     useEffect(() => {
-        console.log('appointment js')
         const tempList = []
         for (let i = 0; i < appontimentQuantity; i++) {
             tempList.push({

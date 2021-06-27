@@ -1,10 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Alerts } from '../../helpers/Alerts';
 
 export const PackageBlock = ({name,colorName,price,session,contentItemList, id}) => {
+    const {auth} = useSelector(state=>state);
+    const history = useHistory();
+
+    const handleClick = () => {
+        if(Object.keys(auth).length === 0){
+            Alerts.showInfoMessage('Debe iniciar sesión para adquirir un paquete')
+        }else{
+            history.push(`/appointment/${id}`)
+        }
+    }
+
     return (
-        <Link to={`/appointment/${id}`} className="package-block">
+        <div className="package-block" onClick={handleClick}>
             <p className="package-block__name" style={{backgroundColor: colorName}}>
                 {name}
             </p>
@@ -26,11 +39,11 @@ export const PackageBlock = ({name,colorName,price,session,contentItemList, id})
             {/* <div className="package-block__buy-button">
                 +
             </div> */}
-        </Link>
+        </div>
     )
 }
 PackageBlock.propTypes = {
-    id :              PropTypes.string.isRequired,
+    id :              PropTypes.number.isRequired,
     name :            PropTypes.string.isRequired,
     price :           PropTypes.number.isRequired,
     session :         PropTypes.string.isRequired,
