@@ -72,10 +72,15 @@ export const logoutMiddleware = (token) => {
     }
 }
 
-export const login = (userInfo)=>({
-    type: types.login,
-    payload:userInfo
-})
+export const login = (userInfo)=>{
+    const {profile:{combos,schedule}} = userInfo;
+    localStorage.setItem(AppSettings.LOCAL_STORAGE.SELECT, JSON.stringify(combos))
+    localStorage.setItem(AppSettings.LOCAL_STORAGE.SCHEDULE, JSON.stringify(schedule))
+    return {
+        type: types.login,
+        payload:userInfo
+    }
+}
 
 export const logout = () => ({
     type: types.logout

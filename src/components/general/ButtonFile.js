@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, Input } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import '../../styles/components/general/_input.scss';
 import { Alerts } from '../../helpers/Alerts';
+import { ModalManager } from '../../helpers/Modal';
 
-export const ButtonFile = ({label, onChange}) => {
+export const ButtonFile = ({label, onChange, value}) => {
     let fileRef           = useRef(null);
-    const [file, setFile] = useState(undefined)
+    const [file, setFile] = useState(value)
 
     const handleOpenSelectFile = _ =>{
         fileRef.current.input.click()
@@ -24,6 +25,13 @@ export const ButtonFile = ({label, onChange}) => {
         setFile(fileSelected)
         onChange(fileSelected)
     }
+
+    useEffect(() => {
+        ModalManager.onClose( _ =>{
+          setFile(undefined)
+          onChange(undefined)
+        })
+    }, [])
 
     return (
         <>

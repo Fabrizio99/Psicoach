@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { logoutMiddleware } from '../../actions/auth';
 import { images } from '../../helpers/getImages';
-import { Menu } from './Menu'
+import { Menu } from './Menu';
 
 export const Navbar = () => {
     const userData   = useSelector(state=>state.auth);
@@ -75,7 +75,7 @@ export const Navbar = () => {
             <div className="center-content navbar-content">
                 <div className="navbar-content__left">
                     <Link to="/">
-                        LOGO
+                        <img src={images('./logo.png').default} className="navbar__logo" alt="logo"/>
                     </Link>
                     <div className="navbar__links-container">
                         <Link to="/us" className="navbar__link">

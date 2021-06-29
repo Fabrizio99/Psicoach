@@ -38,9 +38,9 @@
         background-color: $purple1;
         border-radius: 0.3125rem;
         padding: 0.625rem 0.9375rem;
-        min-width: max-content;
-        width: 70%;
-        max-width: 250px;
+        // min-width: max-content;
+        // width: 70%;
+        // max-width: 250px;
         color: white;
         margin-bottom: 0.625rem;
         cursor: pointer;
@@ -74,6 +74,9 @@
     &__pending{
         &__list{
             padding-top: 0.75rem;
+            min-width: max-content;
+            width: 40%;
+            max-width: 250px;
         }
     }
 }
@@ -96,6 +99,9 @@
         }
 
         &__calendar, &__pending{
+            &__list{
+                width: 70%;
+            }
             &__title{
                 font-size: 30px;
             }

@@ -2,11 +2,15 @@ import { AppSettings } from "../util/AppSeetings";
 import { Alerts } from "./Alerts";
 
 const transformReponse = async(response) => {
-  const responseData = await response.json();
-  return response.ok? responseData: ({errorHttp: true,...responseData})
+  try{
+    const responseData = await response.json();
+    return response.ok? responseData: ({errorHttp: true,...responseData})
+  }catch(e){
+    return (response.ok)? true: ({errorHttp: true,message: 'Ocurrió un error, vuelva a intentar'})
+  }
 }
 
-export const handleWebServiceResponse = async (httpVerb, webService, body, onSuccess, onFinally) => {
+export const handleWebServiceResponse = async (httpVerb, webService, body, onSuccess, onFinally, token) => {
   if(!webService){
     throw new Error('Web service must be provided')
   }
@@ -14,7 +18,7 @@ export const handleWebServiceResponse = async (httpVerb, webService, body, onSuc
     throw new Error('Http verb must be provided')
   }
   try {
-    const response = await HttpRequest[httpVerb](webService,body);
+    const response = await HttpRequest[httpVerb](webService,body, token);
     if(response.errors){
         Alerts.showErrorMessage(response.errors[0]?.message || AppSettings.ERRORS.UNKNOWN);
         onFinally && onFinally()
@@ -25,7 +29,7 @@ export const handleWebServiceResponse = async (httpVerb, webService, body, onSuc
         onFinally && onFinally()
         return false
     }
-    await onSuccess(response)
+    onSuccess && (await onSuccess(response))
     onFinally && onFinally()
     return true
   } catch (error) {
@@ -36,18 +40,23 @@ export const handleWebServiceResponse = async (httpVerb, webService, body, onSuc
 }
 
 export const HttpRequest = {
-  POST: async (url, data) => {
+  POST: async (url, data, token) => {
+    const headers  = {
+      "Content-Type": "application/json",
+    }
+    if(token){
+      headers['Authorization'] = 'Bearer ' + token
+    }
+
     const response = await fetch(url, {
       method        : "POST",
       mode          : "cors",
       cache         : "no-cache",
       credentials   : "same-origin",
-      headers       : {
-        "Content-Type": "application/json",
-      },
       redirect      : "follow",
       referrerPolicy: "no-referrer", //
       body          : JSON.stringify(data),
+      headers,
     });
     return await transformReponse(response)
   },

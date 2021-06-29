@@ -1,44 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Card, Tag } from 'antd';
 import { useForm } from '../../hooks/useForm';
-import { AppSettings } from '../../util/AppSeetings';
+import { AppSettings, Services } from '../../util/AppSeetings';
 import { InputForm } from '../general/InputForm';
 import { SelectForm } from '../general/SelectForm';
 import { AppointmentBlock } from './AppointmentBlock';
 import { ButtonFile } from '../general/ButtonFile';
 import '../../styles/components/appointment/_appointment.scss'
 import { Validators } from '../../helpers/Validators';
+import { handleWebServiceResponse } from '../../helpers/HttpRequest';
+import { Alerts } from '../../helpers/Alerts';
+import { useSelector } from 'react-redux';
 
 
 
 export const Appointment = () => {
-    const { id } = useParams();
+    const { id }         = useParams();
+    const {token}        = useSelector(state=>state.auth);
+    const history        = useHistory();
+    const select         = JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.SELECT))
+    const {products}     = select
+    const currentProduct = products.find(p => p.id === Number(id))
+    
     const [form,handleInputChange] = useForm({
-        name: '',
-        lastName: '',
-        age: '',
-        gender: '',
-        phone: '',
+        name:         '',
+        lastName:     '',
+        age:          '',
+        gender:       '',
+        phone:        '',
         typeDocument: '',
-        document: '',
-        email: '',
-        topic: '',
-        date: '',
-        time: ''
+        document:     '',
+        email:        '',
+        topic:        '',
+        date:         '',
+        time:         '',
+        description:  ''
     });
-    const {name, lastName, gender, age, phone, typeDocument, document, email, topic} = form;
-    const [emailList, setEmailList] = useState([]);
-    const [file, setFile] = useState(undefined);
-    const appontimentQuantity = 2;
-    const [appointmentList, setAppointmentList] = useState([])
+    const {name, lastName, gender, age, phone, typeDocument, document, email, topic, description} = form;
+    const appontimentQuantity                    = Number(currentProduct.cant_session);
+    const [disableButton, setDisableButton]      = useState(false)
+    const [appointmentList, setAppointmentList]  = useState([])
+    const [emailList, setEmailList]              = useState([]);
+    // const [file, setFile]                        = useState(undefined);
+
 
     useEffect(() => {
-        const tempList = []
+        const tempList = [];
         for (let i = 0; i < appontimentQuantity; i++) {
             tempList.push({
-                date: '',
-                startTime: '',
+                date:       '',
+                startTime:  '',
                 finishTime: '',
             })
         }
@@ -46,7 +58,7 @@ export const Appointment = () => {
     }, [])
 
 
-    const handleAddEmail       = _ => {
+    const handleAddEmail = _ => {
         const resetEmail = _ => handleInputChange({target: {name: 'email', value: ''}})
 
         if(emailList.includes(email)){
@@ -58,24 +70,57 @@ export const Appointment = () => {
         setEmailList(list)
         resetEmail()
     }
-    const handleDeleteEmail    = (_email) => {
+    const handleDeleteEmail = (_email) => {
         const list = emailList.filter(e => e !== _email)
         setEmailList(list)
     }
     const handleAppointmentList = (newList) => setAppointmentList(newList)
 
     const validForm = _ => {
-        const validatePersonalData = !!(name.trim() && lastName.trim() && gender && Validators.age(age) && Validators.phone(phone) && typeDocument && document.trim() && document.length === 8 && topic);
+        const validatePersonalData = !!(name.trim() && lastName.trim() && gender && Validators.age(age) && Validators.phone(phone) && typeDocument && document.trim() && document.length === 8 && topic && description.trim());
         const validateEmailList    = emailList.length>0
-        const validateFile         = !!(age && age<18)?file:true;
+        // const validateFile         = !!(age && age<18)?file:true;
         const validateAppointments = appointmentList.every(app => app.date.trim() && app.startTime.trim());
+        // return validatePersonalData && validateEmailList && validateFile && validateAppointments
+        return validatePersonalData && validateEmailList && validateAppointments
+    }
 
-        console.log('----------------------------------------------')
-        console.log('validatePersonalData: ', validatePersonalData)
-        console.log('validateEmailList: ', validateEmailList)
-        console.log('validateFile: ', validateFile)
-        console.log('validateAppointments: ', validateAppointments)
-        return validatePersonalData && validateEmailList && validateFile && validateAppointments
+    const registerAppointment = async _ => {
+        setDisableButton(true)
+        const body = {
+            name: name,
+            surname: lastName,
+            age: age,
+            document_id: typeDocument,
+            document_number: document,
+            product_id: id,
+            gender_id: gender,
+            description: description,
+            disease: select.diseases_type.find(d => d.id === topic)?.name,
+            date: appointmentList.map(a => a.date),
+            start_time: appointmentList.map(a => a.startTime),
+            end_time: appointmentList.map(a => a.finishTime),
+            phone: phone,
+            emails: emailList
+        }
+        const response = await handleWebServiceResponse(
+            AppSettings.HTTP_VERBS.POST,
+            Services.REGISTER_APPOINTMENT,
+            body,
+            _ => null,
+            _ => null,
+            token
+        )
+
+        setDisableButton(false)
+        console.log('respuesta: ', response)
+
+        if(response){
+            Alerts.showSuccessMessage('Registrado correctamente', false)
+            .then( resp => {
+                history.push('/profile')
+            })
+        }
     }
 
     return (
@@ -119,20 +164,7 @@ export const Appointment = () => {
                             label='Género'
                             name="gender"
                             placeholder="Seleccione género"
-                            options={[
-                                {
-                                    name: 'Masculino',
-                                    value: 0
-                                },
-                                {
-                                    name: 'Femenino',
-                                    value: 1
-                                },
-                                {
-                                    name: 'Otros',
-                                    value: 2
-                                }
-                            ]}
+                            options={select.genders}
                         />
                         <InputForm
                             onChange={handleInputChange}
@@ -156,16 +188,7 @@ export const Appointment = () => {
                             label='Tipo de documento'
                             name="typeDocument"
                             placeholder="Seleccione tipo de documento"
-                            options={[
-                                {
-                                    name: 'DNI',
-                                    value: 0
-                                },
-                                {
-                                    name: 'C. E.',
-                                    value: 1
-                                }
-                            ]}
+                            options={select.document_type}
                         />
                         <InputForm
                             onChange={handleInputChange}
@@ -198,19 +221,19 @@ export const Appointment = () => {
                             label='Tema a tratar'
                             name="topic"
                             placeholder="Seleccione el tema a tratar"
-                            options={[
-                                {
-                                    name: 'Ansiedad',
-                                    value: 0
-                                },
-                                {
-                                    name: 'Depresión',
-                                    value: 1
-                                }
-                            ]}
+                            options={select.diseases_type}
                         />
                     </div>
-                    {
+                    <div>
+                        <InputForm
+                            onChange={handleInputChange}
+                            value={description}
+                            name='description'
+                            type={AppSettings.TYPE_INPUTS.TEXT}
+                            label='Descripción'
+                        />
+                    </div>
+                    {/* {
                         age && Number(age) < 18 && (
                             <div className="row">
                                 <ButtonFile
@@ -219,7 +242,7 @@ export const Appointment = () => {
                                 />
                             </div>
                         )
-                    }
+                    } */}
                 </Card>
                 
                 {
@@ -233,7 +256,8 @@ export const Appointment = () => {
 
                 <button 
                     className="button button--primary"
-                    disabled={!validForm()}
+                    disabled={!validForm() || disableButton}
+                    onClick={registerAppointment}
                 >
                     Registrar
                 </button>

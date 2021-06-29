@@ -45,7 +45,7 @@ export const PackageBlock = ({name,colorName,price,session,contentItemList, id})
 PackageBlock.propTypes = {
     id :              PropTypes.number.isRequired,
     name :            PropTypes.string.isRequired,
-    price :           PropTypes.number.isRequired,
+    price :           PropTypes.string.isRequired,
     session :         PropTypes.string.isRequired,
     contentItemList : PropTypes.array.isRequired,
 }

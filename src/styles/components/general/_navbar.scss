@@ -19,8 +19,12 @@ nav,
     height: 60px;
 }
 
+.navbar__logo{
+    height: 30px;
+}
 .navbar-content__left{
     display: flex;
+    align-items: center;
 }
 .navbar__links-container{
     display: none;
@@ -56,6 +60,9 @@ nav,
     nav,
     .navbar-content{
         height: 70px;
+    }
+    .navbar__logo{
+        height: 40px;
     }
     .navbar__links-container{
         display: flex;

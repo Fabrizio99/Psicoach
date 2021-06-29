@@ -1,6 +1,8 @@
 .modal{
-    position: absolute;
-    z-index: 9;
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -18,7 +20,8 @@
     &__content{
         padding: 35px 45px;
         background-color: white;
-        min-width: 500px;
+        width: 500px;
+        max-width: 80%;
         border-radius: 5px;
         display: flex;
         flex-direction: column;

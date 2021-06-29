@@ -9,6 +9,7 @@ export const ModalManager = {
         modal.style.display = 'flex'
         modal.classList.add('animate__fadeIn')
         modal.querySelector('.modal__content').classList.add('animate__pulse')
+        document.querySelector('html').style.overflow = 'hidden'
     },
     closeModal(id){
         if(!id) throw new Error('Id must be provided to close the modal')
@@ -19,6 +20,8 @@ export const ModalManager = {
         modal.style.display = 'none'
         modal.classList.remove('animate__fadeIn')
         modal.querySelector('.modal__content').classList.remove('animate__pulse')
+        document.querySelector('html').style.overflow = 'auto'
+        this.closeFunction && (this.closeFunction())
     },
     onClose(func){
         this.closeFunction = func
@@ -32,6 +35,7 @@ modalList.forEach(modal => modal.addEventListener('click', event => {
     modalHTML.style.display = 'none'
     modal.classList.remove('animate__fadeIn')
     modal.querySelector('.modal__content').classList.remove('animate__pulse')
+    document.querySelector('html').style.overflow = 'auto'
     
     ModalManager.closeFunction && ModalManager.closeFunction()
 }))

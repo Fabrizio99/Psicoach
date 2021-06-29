@@ -21,14 +21,16 @@ export const SelectForm = ({onChange, name, label, options, placeholder}) => {
             {label}
             <Select onChange={e => handleChange(e)} style={{ width: '100%' }} placeholder={placeholder}>
                 {
-                    options.map((option, index) => (
-                        <Option 
-                            value={option.value}
-                            key={index}
-                        >
-                            {option.name}
-                        </Option>
-                    ))
+                    options && (
+                        options.map((option, index) => (
+                            <Option 
+                                value={option.id}
+                                key={index}
+                            >
+                                {option.name}
+                            </Option>
+                        ))
+                    )
                 }
             </Select>
         </label>

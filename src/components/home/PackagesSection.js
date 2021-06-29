@@ -1,13 +1,12 @@
 import React from 'react';
+import { AppSettings } from '../../util/AppSeetings';
 import { PackageBlock } from './PackageBlock';
 
 export const PackagesSection = () => {
-    const packages = [
+    const productContent = [
         {
             id:               1,
-            name :            'REGULAR',
-            colorName:        '#F78490',
-            price :           380,
+            colorName:        '#8396D6',
             session :         'por 5 sesiones (70 c/u) + consulta',
             contentItemList : [
                 'Informe firmado y sellado s/. 60'
@@ -15,9 +14,15 @@ export const PackagesSection = () => {
         },
         {
             id:               2,
-            name :            'MEDIUM',
+            colorName:        '#F78490',
+            session :         'por 5 sesiones (70 c/u) + consulta',
+            contentItemList : [
+                'Informe firmado y sellado s/. 60'
+            ]
+        },
+        {
+            id:               3,
             colorName:        '#FFE9CC',
-            price :           360,
             session :         'por 5 sesiones (65 c/u) + consulta',
             contentItemList : [
                 'Acceso exclusivo al grupo de apoyo psicológico de WhatsApp',
@@ -26,10 +31,8 @@ export const PackagesSection = () => {
             ]
         },
         {
-            id:               3,
-            name :            'PREMIUM',
+            id:               4,
             colorName:        '#CEF0EA',
-            price :           340,
             session :         'por 5 sesiones (60 c/u) + consulta',
             contentItemList : [
                 'Acceso exclusivo al grupo de apoyo psicológico de WhatsApp',
@@ -40,10 +43,8 @@ export const PackagesSection = () => {
             ]
         },
         {
-            id:               4,
-            name :            'LUXURY',
+            id:               5,
             colorName:        '#7ACCF1',
-            price :           380,
             session :         'por 5 sesiones (70 c/u) + consulta',
             contentItemList : [
                 'Todos los beneficios del paquete Premium',
@@ -51,6 +52,18 @@ export const PackagesSection = () => {
             ]
         }
     ]
+
+    const getPackages = _ => {
+        const {products} = JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.SELECT))
+
+        products.forEach(product => {
+            const current = productContent.find(p => p.id === product.id)
+            product.colorName = current.colorName;
+            product.session = current.session
+            product.contentItemList = current.contentItemList
+        });
+        return products
+    }
 
     return (
         <div className="package-section">
@@ -61,7 +74,7 @@ export const PackagesSection = () => {
                 <div className="slides-container">
                     <div className="slides-wrapper">
                         {
-                            packages.map(p=>(
+                            getPackages().map(p=>(
                                 <PackageBlock
                                     key={p.id}
                                     {...p}

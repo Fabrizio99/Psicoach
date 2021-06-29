@@ -23,7 +23,7 @@
         font-size: 16px;
         color: $blue;
     }
-    .row, .row-3{
+    .row, .row-3, .row-4{
         display: grid;
     }
     .button--primary{
@@ -34,6 +34,32 @@
         font-size: 18px;
         display: block;
     }   
+    .button--date-time{
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: white;
+        background-color: $purple2;
+        font-family: 'Roboto';
+        margin-top: 8px;
+
+        &:disabled{
+            background-color: lighten($color: $purple2, $amount: 15) !important;
+            cursor: default;
+        }
+
+        &:hover{
+            background-color: darken($color: $purple2, $amount: 5);
+        }
+        &:active{
+            background-color: darken($color: $purple2, $amount: 10);
+        }
+    }
+    .error-message{
+        color: red
+    }
+    .correct-message{
+        color: green
+    }
 }
 @media (min-width : 768px){
     .row{
@@ -43,6 +69,12 @@
         &-3{
             grid-template-columns: repeat(3, 1fr);
             column-gap: 20px;
+        }
+        
+        &-4{
+            grid-template-columns: repeat(3, 1fr) auto;
+            column-gap: 20px;
+            align-items: center;
         }
     }
 }
