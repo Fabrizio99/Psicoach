@@ -6,6 +6,9 @@ export const PackagesSection = () => {
     const productContent = [
         {
             id:               1,
+            "name":"BASIC",
+            "cant_session":"1",
+            "price":"70",
             colorName:        '#8396D6',
             session :         'por 5 sesiones (70 c/u) + consulta',
             contentItemList : [
@@ -14,6 +17,9 @@ export const PackagesSection = () => {
         },
         {
             id:               2,
+            "name":"REGULAR",
+            "cant_session":"3",
+            "price":"340",
             colorName:        '#F78490',
             session :         'por 5 sesiones (70 c/u) + consulta',
             contentItemList : [
@@ -22,6 +28,9 @@ export const PackagesSection = () => {
         },
         {
             id:               3,
+            "name":"MEDIUM",
+            "cant_session":"4",
+            "price":"360",
             colorName:        '#FFE9CC',
             session :         'por 5 sesiones (65 c/u) + consulta',
             contentItemList : [
@@ -32,6 +41,9 @@ export const PackagesSection = () => {
         },
         {
             id:               4,
+            "name":"PREMIUM",
+            "cant_session":"5",
+            "price":"370",
             colorName:        '#CEF0EA',
             session :         'por 5 sesiones (60 c/u) + consulta',
             contentItemList : [
@@ -44,6 +56,9 @@ export const PackagesSection = () => {
         },
         {
             id:               5,
+            "name":"LUXURY",
+            "cant_session":"6",
+            "price":"380",
             colorName:        '#7ACCF1',
             session :         'por 5 sesiones (70 c/u) + consulta',
             contentItemList : [
@@ -54,6 +69,9 @@ export const PackagesSection = () => {
     ]
 
     const getPackages = _ => {
+        const productsJson = localStorage.getItem(AppSettings.LOCAL_STORAGE.SELECT)
+
+        if(!productsJson)   return []        
         const {products} = JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.SELECT))
 
         products.forEach(product => {
@@ -65,25 +83,29 @@ export const PackagesSection = () => {
         return products
     }
 
+    const products = getPackages()
+
     return (
-        <div className="package-section">
-            <div className="center-content">
-                <h3 className="title-section">
-                    Paquetes
-                </h3>
-                <div className="slides-container">
-                    <div className="slides-wrapper">
-                        {
-                            getPackages().map(p=>(
-                                <PackageBlock
-                                    key={p.id}
-                                    {...p}
-                                />
-                            ))
-                        }
+        productContent.length > 0 && (
+            <div className="package-section">
+                <div className="center-content">
+                    <h3 className="title-section">
+                        Paquetes
+                    </h3>
+                    <div className="slides-container">
+                        <div className="slides-wrapper">
+                            {
+                                productContent.map(p=>(
+                                    <PackageBlock
+                                        key={p.id}
+                                        {...p}
+                                    />
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        )
     )
 }

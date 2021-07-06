@@ -17,14 +17,14 @@ export const SpecialistSection = () => {
                             <p className="specialist-block__information__text">PNL Practitioner</p>
                         </div>
                     </div>
-                    <div className="specialist-block">
+                    {/* <div className="specialist-block">
                         <img src={images('./foto1.png').default} className="specialist-block__image" alt="specialist"/>
                         <div className="specialist-block__information">
                             <h4 className="specialist-block__information__title">Nataly Fortón Martinez</h4>
                             <small className="specialist-block__information__job">Practicante de Psicoach en Vida</small>
                             <p className="specialist-block__information__text">Estudiante de 10mo ciclo de Psicología en la universidad Autónoma del Perú</p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

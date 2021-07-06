@@ -22,6 +22,7 @@ export const Appointment = () => {
     const select         = JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.SELECT))
     const {products}     = select
     const currentProduct = products.find(p => p.id === Number(id))
+    console.log({currentProduct})
     
     const [form,handleInputChange] = useForm({
         name:         '',
@@ -42,7 +43,7 @@ export const Appointment = () => {
     const [disableButton, setDisableButton]      = useState(false)
     const [appointmentList, setAppointmentList]  = useState([])
     const [emailList, setEmailList]              = useState([]);
-    // const [file, setFile]                        = useState(undefined);
+    const [file, setFile]                        = useState(undefined);
 
 
     useEffect(() => {
@@ -79,10 +80,10 @@ export const Appointment = () => {
     const validForm = _ => {
         const validatePersonalData = !!(name.trim() && lastName.trim() && gender && Validators.age(age) && Validators.phone(phone) && typeDocument && document.trim() && document.length === 8 && topic && description.trim());
         const validateEmailList    = emailList.length>0
-        // const validateFile         = !!(age && age<18)?file:true;
+        const validateFile         = !!(age && age<18)?file:true;
         const validateAppointments = appointmentList.every(app => app.date.trim() && app.startTime.trim());
-        // return validatePersonalData && validateEmailList && validateFile && validateAppointments
-        return validatePersonalData && validateEmailList && validateAppointments
+        return validatePersonalData && validateEmailList && validateFile && validateAppointments
+        // return validatePersonalData && validateEmailList && validateAppointments
     }
 
     const registerAppointment = async _ => {
@@ -130,13 +131,13 @@ export const Appointment = () => {
                 <Card title="Datos Personales" style={{marginBottom: 50}} className="personal">                    
                     <div className="row">
                         <InputForm
-                            value={'Luxury'}
+                            value={currentProduct.name}
                             type={AppSettings.TYPE_INPUTS.TEXT}
                             label='Paquete'
                             disabled={true}
                         />
                         <InputForm
-                            value={'380.00'}
+                            value={currentProduct.price}
                             type={AppSettings.TYPE_INPUTS.TEXT}
                             label='Precio'
                             disabled={true}
@@ -233,7 +234,7 @@ export const Appointment = () => {
                             label='Descripción'
                         />
                     </div>
-                    {/* {
+                    {
                         age && Number(age) < 18 && (
                             <div className="row">
                                 <ButtonFile
@@ -242,7 +243,7 @@ export const Appointment = () => {
                                 />
                             </div>
                         )
-                    } */}
+                    }
                 </Card>
                 
                 {

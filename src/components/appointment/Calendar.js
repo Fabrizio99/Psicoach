@@ -4,17 +4,21 @@ import { Menu, Dropdown } from "antd";
 import moment from "moment";
 
 export const CalendarComponent = ({onChange, calendar}) => {
+  console.log('calendar:', calendar) 
   const handlePanel = resp => {
     onChange({year: resp.year(), month: resp.format('M')})
   }
 
 
   function getListData(value) {
-    const date = calendar.find(c => moment(c.date).isSame(value,'day') &&  moment(c.date).isSame(value,'month') &&  moment(c.date).isSame(value,'year'))
+    const date = calendar.filter(c => {
+      const parsedDate = c.date.split('T')[0]
+      return moment(parsedDate).isSame(value,'day') &&  moment(parsedDate).isSame(value,'month') &&  moment(parsedDate).isSame(value,'year')
+    })
 
     let listData;
     if(date){
-      listData = [{ content: date.name, link: date.link_meet }];
+      listData = date.map(d => ({ content: d.name, link: d.link_meet }))
     }
 
     return listData || [];

@@ -84,6 +84,7 @@ export const AppRouter = () => {
           <Redirect to="/" />
         </Switch>
       </Router>
+      <a className="button button__app" href="https://drive.google.com/file/d/1DQgaYO-quebe1ZtSw8udj1zDt6wS_p39/view?usp=sharing" target="_blank" rel="noreferrer">Descargar la aplicación</a>
     </div>
   );
 };
