@@ -10,10 +10,8 @@ export const PackagesSection = () => {
             "cant_session":"1",
             "price":"70",
             colorName:        '#8396D6',
-            session :         'por 5 sesiones (70 c/u) + consulta',
-            contentItemList : [
-                'Informe firmado y sellado s/. 60'
-            ]
+            session :         'por 1 sesiones (70 c/u) + consulta',
+            contentItemList : []
         },
         {
             id:               2,
@@ -21,7 +19,7 @@ export const PackagesSection = () => {
             "cant_session":"3",
             "price":"340",
             colorName:        '#F78490',
-            session :         'por 5 sesiones (70 c/u) + consulta',
+            session :         'por 3 sesiones (70 c/u) + consulta',
             contentItemList : [
                 'Informe firmado y sellado s/. 60'
             ]
@@ -32,7 +30,7 @@ export const PackagesSection = () => {
             "cant_session":"4",
             "price":"360",
             colorName:        '#FFE9CC',
-            session :         'por 5 sesiones (65 c/u) + consulta',
+            session :         'por 4 sesiones (65 c/u) + consulta',
             contentItemList : [
                 'Acceso exclusivo al grupo de apoyo psicológico de WhatsApp',
                 'Acceso gratuitos a las MasterClass',
@@ -60,7 +58,7 @@ export const PackagesSection = () => {
             "cant_session":"6",
             "price":"380",
             colorName:        '#7ACCF1',
-            session :         'por 5 sesiones (70 c/u) + consulta',
+            session :         'por 6 sesiones (70 c/u) + consulta',
             contentItemList : [
                 'Todos los beneficios del paquete Premium',
                 'Pago en 2 cuotas (210/210)'
