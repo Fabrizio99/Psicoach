@@ -90,6 +90,7 @@ export const PackagesSection = () => {
                     <h3 className="title-section">
                         Paquetes
                     </h3>
+                    <p className="package-text">Seleccione un paquete</p>
                     <div className="slides-container">
                         <div className="slides-wrapper">
                             {

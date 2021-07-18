@@ -4,7 +4,6 @@ import { Menu, Dropdown } from "antd";
 import moment from "moment";
 
 export const CalendarComponent = ({onChange, calendar}) => {
-  console.log('calendar:', calendar) 
   const handlePanel = resp => {
     onChange({year: resp.year(), month: resp.format('M')})
   }

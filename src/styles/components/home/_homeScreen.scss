@@ -199,8 +199,14 @@
     background-color: rgba(184, 226, 255, 0.35);
     // padding: 1.25rem 0 1.875rem;
 }
+.package-text{
+    margin-left: 20px;
+    margin-bottom: 1.4rem;
+    font-size: 18px;
+    color: $greyText;
+}
 .package-section .title-section{
-    // margin-bottom: 1.125rem;
+    margin-bottom: 2rem;
 }
 .slides-wrapper{
     // display: grid;

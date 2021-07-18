@@ -47,7 +47,6 @@ export const ProfileScreen = () => {
   };
 
   const handleCalendarChange = (d) =>{
-      console.log('entra acaaaaa: ', d)
     setDateInformation(d.year, d.month)
   }
 

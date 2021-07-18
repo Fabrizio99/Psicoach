@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Card, Tag } from 'antd';
+
+import '../../styles/components/appointment/_appointment.scss'
 import { useForm } from '../../hooks/useForm';
 import { AppSettings, Services } from '../../util/AppSeetings';
 import { InputForm } from '../general/InputForm';
 import { SelectForm } from '../general/SelectForm';
 import { AppointmentBlock } from './AppointmentBlock';
 import { ButtonFile } from '../general/ButtonFile';
-import '../../styles/components/appointment/_appointment.scss'
 import { Validators } from '../../helpers/Validators';
 import { handleWebServiceResponse } from '../../helpers/HttpRequest';
 import { Alerts } from '../../helpers/Alerts';
-import { useSelector } from 'react-redux';
+import { images } from '../../helpers/getImages';
 
 
 
@@ -22,7 +24,6 @@ export const Appointment = () => {
     const select         = JSON.parse(localStorage.getItem(AppSettings.LOCAL_STORAGE.SELECT))
     const {products}     = select
     const currentProduct = products.find(p => p.id === Number(id))
-    console.log({currentProduct})
     
     const [form,handleInputChange] = useForm({
         name:         '',
@@ -43,15 +44,16 @@ export const Appointment = () => {
     const [disableButton, setDisableButton]      = useState(false)
     const [appointmentList, setAppointmentList]  = useState([])
     const [emailList, setEmailList]              = useState([]);
-    const [file, setFile]                        = useState(undefined);
+    const [file, setFile]                        = useState();
+    const [step, setStep]                        = useState(0);
 
 
     useEffect(() => {
         const tempList = [];
         for (let i = 0; i < appontimentQuantity; i++) {
             tempList.push({
-                date:       '',
-                startTime:  '',
+                date      : '',
+                startTime : '',
                 finishTime: '',
             })
         }
@@ -83,26 +85,25 @@ export const Appointment = () => {
         const validateFile         = !!(age && age<18)?file:true;
         const validateAppointments = appointmentList.every(app => app.date.trim() && app.startTime.trim());
         return validatePersonalData && validateEmailList && validateFile && validateAppointments
-        // return validatePersonalData && validateEmailList && validateAppointments
     }
 
     const registerAppointment = async _ => {
         setDisableButton(true)
         const body = {
-            name: name,
-            surname: lastName,
-            age: age,
-            document_id: typeDocument,
-            document_number: document,
-            product_id: id,
-            gender_id: gender,
-            description: description,
-            disease: select.diseases_type.find(d => d.id === topic)?.name,
-            date: appointmentList.map(a => a.date),
-            start_time: appointmentList.map(a => a.startTime),
-            end_time: appointmentList.map(a => a.finishTime),
-            phone: phone,
-            emails: emailList
+            name            : name,
+            surname         : lastName,
+            age             : age,
+            document_id     : typeDocument,
+            document_number : document,
+            product_id      : id,
+            gender_id       : gender,
+            description     : description,
+            disease         : select.diseases_type.find(d => d.id === topic)?.name,
+            date            : appointmentList.map(a => a.date),
+            start_time      : appointmentList.map(a => a.startTime),
+            end_time        : appointmentList.map(a => a.finishTime),
+            phone           : phone,
+            emails          : emailList
         }
         const response = await handleWebServiceResponse(
             AppSettings.HTTP_VERBS.POST,
@@ -114,155 +115,176 @@ export const Appointment = () => {
         )
 
         setDisableButton(false)
-        console.log('respuesta: ', response)
 
         if(response){
             Alerts.showSuccessMessage('Registrado correctamente', false)
             .then( resp => {
-                history.push('/profile')
+                setStep(1)
+                // history.push('/profile')
             })
         }
     }
 
     return (
         <div className="container center-content">
-            <h2 className="container__title">Compra de paquete</h2>
-            <form className="form" onSubmit={e => e.preventDefault()}>
-                <Card title="Datos Personales" style={{marginBottom: 50}} className="personal">                    
-                    <div className="row">
-                        <InputForm
-                            value={currentProduct.name}
-                            type={AppSettings.TYPE_INPUTS.TEXT}
-                            label='Paquete'
-                            disabled={true}
-                        />
-                        <InputForm
-                            value={currentProduct.price}
-                            type={AppSettings.TYPE_INPUTS.TEXT}
-                            label='Precio'
-                            disabled={true}
-                        />
-                    </div>
-                    <div className="row">
-                        <InputForm
-                            onChange={handleInputChange}
-                            value={name}
-                            name='name'
-                            type={AppSettings.TYPE_INPUTS.TEXT}
-                            label='Nombres'
-                        />
-                        <InputForm
-                            onChange={handleInputChange}
-                            value={lastName}
-                            name='lastName'
-                            type={AppSettings.TYPE_INPUTS.TEXT}
-                            label='Apellidos'
-                        />
-                    </div>
-                    <div className="row-3">
-                        <SelectForm
-                            onChange={handleInputChange}
-                            label='Género'
-                            name="gender"
-                            placeholder="Seleccione género"
-                            options={select.genders}
-                        />
-                        <InputForm
-                            onChange={handleInputChange}
-                            value={age}
-                            name='age'
-                            type={AppSettings.TYPE_INPUTS.NUMBER}
-                            typeNumber={AppSettings.TYPE_NUMBERS.AGE}
-                            label='Edad'
-                        />
-                        <InputForm
-                            onChange={handleInputChange}
-                            value={phone}
-                            name='phone'
-                            type={AppSettings.TYPE_INPUTS.TEL}
-                            label='Teléfono'
-                        />
-                    </div>
-                    <div className="row">
-                        <SelectForm
-                            onChange={handleInputChange}
-                            label='Tipo de documento'
-                            name="typeDocument"
-                            placeholder="Seleccione tipo de documento"
-                            options={select.document_type}
-                        />
-                        <InputForm
-                            onChange={handleInputChange}
-                            value={document}
-                            name='document'
-                            type={AppSettings.TYPE_INPUTS.NUMBER}
-                            label='N. Documento'
-                        />
-                    </div>
-                    <div className="row">
-                        <div>
-                            <InputForm
-                                onChange={handleInputChange}
-                                value={email}
-                                name='email'
-                                type={AppSettings.TYPE_INPUTS.TEXT}
-                                label='Correo Electrónico (De enter cada vez que agrega un correo)'
-                                onEnter={handleAddEmail}
-                            />
-                            {
-                                emailList.map( (el, index) => (
-                                    <Tag closable key={el} onClose={_ => handleDeleteEmail(el)}>
-                                        {el}
-                                    </Tag>
-                                ))
-                            }
-                        </div>
-                        <SelectForm
-                            onChange={handleInputChange}
-                            label='Tema a tratar'
-                            name="topic"
-                            placeholder="Seleccione el tema a tratar"
-                            options={select.diseases_type}
-                        />
-                    </div>
-                    <div>
-                        <InputForm
-                            onChange={handleInputChange}
-                            value={description}
-                            name='description'
-                            type={AppSettings.TYPE_INPUTS.TEXT}
-                            label='Descripción'
-                        />
-                    </div>
-                    {
-                        age && Number(age) < 18 && (
+            <h2 className="container__title">Reserva de paquete</h2>
+            {
+                step === 0 && (
+                    <form className="form" onSubmit={e => e.preventDefault()}>
+                        <Card title="Datos Personales" style={{marginBottom: 50}} className="personal">                    
                             <div className="row">
-                                <ButtonFile
-                                    label='Consentimiento del tutor'
-                                    onChange={f => setFile(f)}
+                                <InputForm
+                                    value={currentProduct.name}
+                                    type={AppSettings.TYPE_INPUTS.TEXT}
+                                    label='Paquete'
+                                    disabled={true}
+                                />
+                                <InputForm
+                                    value={currentProduct.price}
+                                    type={AppSettings.TYPE_INPUTS.TEXT}
+                                    label='Precio'
+                                    disabled={true}
                                 />
                             </div>
-                        )
-                    }
-                </Card>
-                
-                {
-                    appointmentList.length > 0 && (
-                        <AppointmentBlock
-                            list={appointmentList}
-                            onChange={handleAppointmentList}
-                        />
-                    )
-                }
-
-                <button 
-                    className="button button--primary"
-                    disabled={!validForm() || disableButton}
-                    onClick={registerAppointment}
-                >
-                    Registrar
-                </button>
-            </form>
+                            <div className="row">
+                                <InputForm
+                                    onChange={handleInputChange}
+                                    value={name}
+                                    name='name'
+                                    type={AppSettings.TYPE_INPUTS.TEXT}
+                                    label='Nombres'
+                                />
+                                <InputForm
+                                    onChange={handleInputChange}
+                                    value={lastName}
+                                    name='lastName'
+                                    type={AppSettings.TYPE_INPUTS.TEXT}
+                                    label='Apellidos'
+                                />
+                            </div>
+                            <div className="row-3">
+                                <SelectForm
+                                    onChange={handleInputChange}
+                                    label='Género'
+                                    name="gender"
+                                    placeholder="Seleccione género"
+                                    options={select.genders.filter(g => g.name !== 'Sin definir')}
+                                />
+                                <InputForm
+                                    onChange={handleInputChange}
+                                    value={age}
+                                    name='age'
+                                    type={AppSettings.TYPE_INPUTS.NUMBER}
+                                    typeNumber={AppSettings.TYPE_NUMBERS.AGE}
+                                    label='Edad'
+                                />
+                                <InputForm
+                                    onChange={handleInputChange}
+                                    value={phone}
+                                    name='phone'
+                                    type={AppSettings.TYPE_INPUTS.TEL}
+                                    label='Teléfono'
+                                />
+                            </div>
+                            <div className="row">
+                                <SelectForm
+                                    onChange={handleInputChange}
+                                    label='Tipo de documento'
+                                    name="typeDocument"
+                                    placeholder="Seleccione tipo de documento"
+                                    options={select.document_type}
+                                />
+                                <InputForm
+                                    onChange={handleInputChange}
+                                    value={document}
+                                    name='document'
+                                    type={AppSettings.TYPE_INPUTS.NUMBER}
+                                    label='N. Documento'
+                                />
+                            </div>
+                            <div className="row">
+                                <div>
+                                    <InputForm
+                                        onChange={handleInputChange}
+                                        value={email}
+                                        name='email'
+                                        type={AppSettings.TYPE_INPUTS.TEXT}
+                                        label='Correo Electrónico (De enter cada vez que agrega un correo)'
+                                        onEnter={handleAddEmail}
+                                    />
+                                    {
+                                        emailList.map( (el, index) => (
+                                            <Tag closable key={el} onClose={_ => handleDeleteEmail(el)}>
+                                                {el}
+                                            </Tag>
+                                        ))
+                                    }
+                                </div>
+                                <SelectForm
+                                    onChange={handleInputChange}
+                                    label='Tema a tratar'
+                                    name="topic"
+                                    placeholder="Seleccione el tema a tratar"
+                                    options={select.diseases_type}
+                                />
+                            </div>
+                            <div>
+                                <InputForm
+                                    onChange={handleInputChange}
+                                    value={description}
+                                    name='description'
+                                    type={AppSettings.TYPE_INPUTS.TEXT}
+                                    label='Descripción'
+                                />
+                            </div>
+                            {
+                                age && Number(age) < 18 && (
+                                    <div className="row">
+                                        <ButtonFile
+                                            label='Consentimiento del tutor'
+                                            onChange={f => setFile(f)}
+                                        />
+                                    </div>
+                                )
+                            }
+                        </Card>
+                        
+                        {
+                            appointmentList.length > 0 && (
+                                <AppointmentBlock
+                                    list={appointmentList}
+                                    onChange={handleAppointmentList}
+                                />
+                            )
+                        }
+                        <div className="alert__error" style={{marginTop: 15}}>
+                            Recuerda que no hay reembolso
+                        </div>
+                        <button 
+                            className="button button--primary"
+                            disabled={!validForm() || disableButton}
+                            onClick={registerAppointment}
+                        >
+                            Registrar
+                        </button>
+                    </form>
+                )
+            }
+            {
+                step === 1 && (
+                    <>
+                        <p className="payment__description">Buena! Se registro tu reserva, puedes pagar por los siguientes medios: </p>
+                        <div className="payment__account">
+                            <h2>Yape</h2>
+                            <img src={images('./qr_image.png').default} alt="qr"/>
+                        </div>
+                        <div className="payment__account">
+                            <h2>BCP</h2>
+                            <p>N° de cuenta: <strong>183-23412323-9-23</strong></p>
+                        </div>
+                    </>
+                )
+            }
         </div>
     )
 }

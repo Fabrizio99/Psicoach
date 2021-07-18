@@ -1,0 +1,10 @@
+.alert{
+    &__error{
+        display: inline-block;
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: #842029;
+        background-color: #f8d7da;
+        border-color: #f5c2c7;
+    }
+}

@@ -25,13 +25,13 @@ export const Footer = () => {
                             <h4 className="contact-group__title">Contáctanos</h4>
                             <div className="contact-group__whatsapp">
                                 <img src={images('./whatsapp.svg').default} alt="whatsapp"/>
-                                <a href="tel:982934212" className="contact-group__whatsapp__number">+51 982 934 212</a>
+                                <a href="https://api.whatsapp.com/send/?phone=%2B51982934212" className="contact-group__whatsapp__number" target="_blank" rel="noreferrer">+51 982 934 212</a>
                             </div>
                             <div className="contact-group__media">
-                                <a href="https://www.facebook.com/PsicoachEnVida" target="_blank">
+                                <a href="https://www.facebook.com/PsicoachEnVida" target="_blank" rel="noreferrer">
                                     <img src={images('./facebook.svg').default} alt="facebook"/>
                                 </a>
-                                <a href="https://www.instagram.com/psicoachenvidaofficial/" target="_blank">
+                                <a href="https://www.instagram.com/psicoachenvidaofficial/" target="_blank" rel="noreferrer">
                                     <img src={images('./instagram.svg').default} alt="instagram"/>
                                 </a>
                             </div>

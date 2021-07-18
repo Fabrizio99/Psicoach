@@ -60,6 +60,35 @@
     .correct-message{
         color: green
     }
+
+    .payment{
+        &__description{
+            font-size: 16px;
+        }
+        &__account{
+            text-align: center;
+            margin-top: 20px;
+
+            h2{
+                font-weight: bold;
+                font-size: 22px;
+                color: $purple2;
+                margin-bottom: 5px;
+            }
+
+            p{
+                font-size: 18px;
+            }
+
+            &:first-of-type{
+                margin-top: 50px;
+            }
+
+            &:last-child{
+                margin-bottom: 50px;
+            }
+        }
+    }
 }
 @media (min-width : 768px){
     .row{

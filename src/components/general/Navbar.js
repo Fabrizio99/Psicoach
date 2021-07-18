@@ -75,18 +75,19 @@ export const Navbar = () => {
             <div className="center-content navbar-content">
                 <div className="navbar-content__left">
                     <Link to="/">
+                        {/* <img src={images('./nav-logo.svg').default} className="navbar__logo" alt="logo"/> */}
                         <img src={images('./logo.png').default} className="navbar__logo" alt="logo"/>
                     </Link>
                     <div className="navbar__links-container">
                         <Link to="/us" className="navbar__link">
                             Nosotros
                         </Link>
-                        <Link to="/talleres" className="navbar__link">
+                        {/* <Link to="/talleres" className="navbar__link">
                             Talleres
                         </Link>
                         <Link to="/especialistas" className="navbar__link">
                             Especialistas
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
                 <div className="navbar-content__right">

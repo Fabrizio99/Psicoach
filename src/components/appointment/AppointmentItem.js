@@ -30,9 +30,9 @@ export const AppointmentItem = ({item, index, onChange}) => {
                 setAppointment(tempAppointment)
                 return;
             }
-            let [hour, minute] = tempAppointment.startTime.split(':')
-            hour = (Number(hour) === 23?0:Number(hour)+1).toString()
-            tempAppointment.finishTime = [hour,minute].join(':')
+            let [hour] = tempAppointment.startTime.split(':')
+            // hour = (Number(hour) === 23?0:Number(hour)+1).toString()
+            tempAppointment.finishTime = [hour,'45'].join(':')
         }
 
         if(type === 'date'){
@@ -54,12 +54,17 @@ export const AppointmentItem = ({item, index, onChange}) => {
         setAppointment(tempAppointment)
     }
 
-    const disabledDate         = current => current && current < moment().endOf('day');
+    const disabledDate         = current => (current && current < moment().endOf('day')) || current.day() === 0;
+    
     const handleDisableHours   = a => {
         const unavailableHours = []
         for (let i = 0; i < 24; i++) {
-            const hour = hours.find(h => Number(h.split(':')[0]) === i)
-            hour || unavailableHours.push(i)
+            if(!hours){
+                unavailableHours.push(i)
+            }else{
+                const hour = hours.find(h => Number(h.split(':')[0]) === i)
+                hour || unavailableHours.push(i)
+            }
         }
 
         return unavailableHours

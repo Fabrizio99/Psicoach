@@ -50,14 +50,17 @@ export const RegisterScreen = () => {
             <label className="auth__label">
                 Pregunta Secreta *
                 <Input className="auth__input" name="question" onChange={handleInputChange} type="text"/>
+                <p className="input__help">Ej. ¿Animal favorito?</p>
             </label>
             <label className="auth__label">
                 Respuesta Secreta *
                 <Input className="auth__input" name="answer" onChange={handleInputChange} type="text"/>
+                <p className="input__help">Ej. Perro</p>
             </label>
             <label className="auth__label">
                 Frase de ayuda *
                 <Input className="auth__input" name="phrase" onChange={handleInputChange} type="text"/>
+                <p className="input__help">Ej. Cuadrúpedo</p> 
             </label>
             <button 
                 className="button button--primary auth__forgot-password__login"

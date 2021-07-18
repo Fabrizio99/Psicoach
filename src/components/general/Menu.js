@@ -20,12 +20,12 @@ export const Menu = () => {
                 <Link to="/us" className="menu-content__link">
                     Nosotros
                 </Link>
-                <Link to="/talleres" className="menu-content__link">
+                {/* <Link to="/talleres" className="menu-content__link">
                     Talleres
                 </Link>
                 <Link to="/especialistas" className="menu-content__link">
                     Especialistas
-                </Link>
+                </Link> */}
             </div>       
         </div>
     )
