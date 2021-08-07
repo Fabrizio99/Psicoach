@@ -14,12 +14,12 @@ export const Footer = () => {
                             <Link to="/us" className="info-group__link">
                                 Nosotros
                             </Link>
-                            <Link to="/talleres" className="info-group__link">
+                            {/* <Link to="/talleres" className="info-group__link">
                                 Talleres
                             </Link>
                             <Link to="/especialistas" className="info-group__link">
                                 Especialistas
-                            </Link>
+                            </Link> */}
                         </div>
                         <div className="contact-group">
                             <h4 className="contact-group__title">Contáctanos</h4>

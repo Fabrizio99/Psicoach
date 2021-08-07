@@ -89,6 +89,13 @@
             }
         }
     }
+    .terms{
+        cursor: pointer;
+        margin-top: 1.25rem;
+        font-size: 1.125rem;
+        text-decoration: underline;
+        color: #434343;
+    }
 }
 @media (min-width : 768px){
     .row{

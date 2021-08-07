@@ -5,32 +5,32 @@ import { PackageBlock } from './PackageBlock';
 export const PackagesSection = () => {
     const productContent = [
         {
+            cant_session:     "1",
             id:               1,
-            "name":"BASIC",
-            "cant_session":"1",
-            "price":"70",
+            name:             "SESION",
+            price:            "70",
             colorName:        '#8396D6',
-            session :         'por 1 sesiones (70 c/u) + consulta',
+            session :         '',
             contentItemList : []
         },
         {
+            cant_session:     "5",
             id:               2,
-            "name":"REGULAR",
-            "cant_session":"3",
-            "price":"340",
+            name:             "REGULAR",
+            price:            "380",
             colorName:        '#F78490',
-            session :         'por 3 sesiones (70 c/u) + consulta',
+            session :         'por 5 sesiones (70 c/u) + consulta',
             contentItemList : [
                 'Informe firmado y sellado s/. 60'
             ]
         },
         {
+            cant_session:     "5",
             id:               3,
-            "name":"MEDIUM",
-            "cant_session":"4",
-            "price":"360",
+            name:             "MEDIUM",
+            price:            "360",
             colorName:        '#FFE9CC',
-            session :         'por 4 sesiones (65 c/u) + consulta',
+            session :         'por 5 sesiones (65 c/u) + consulta',
             contentItemList : [
                 'Acceso exclusivo al grupo de apoyo psicológico de WhatsApp',
                 'Acceso gratuitos a las MasterClass',
@@ -38,10 +38,10 @@ export const PackagesSection = () => {
             ]
         },
         {
+            cant_session:     "5",
             id:               4,
-            "name":"PREMIUM",
-            "cant_session":"5",
-            "price":"370",
+            name:             "PREMIUM",
+            price:            "340",
             colorName:        '#CEF0EA',
             session :         'por 5 sesiones (60 c/u) + consulta',
             contentItemList : [
@@ -53,10 +53,10 @@ export const PackagesSection = () => {
             ]
         },
         {
+            cant_session:     "8",
             id:               5,
-            "name":"LUXURY",
-            "cant_session":"6",
-            "price":"380",
+            name:             "LUXURY",
+            price:            "428",
             colorName:        '#7ACCF1',
             session :         'por 6 sesiones (70 c/u) + consulta',
             contentItemList : [

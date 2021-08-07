@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Card, Tag } from 'antd';
+import { Card, Tag, Modal, Button } from 'antd';
 
 import '../../styles/components/appointment/_appointment.scss'
 import { useForm } from '../../hooks/useForm';
@@ -46,6 +46,7 @@ export const Appointment = () => {
     const [emailList, setEmailList]              = useState([]);
     const [file, setFile]                        = useState();
     const [step, setStep]                        = useState(0);
+    const [isModalVisible, setIsModalVisible]    = useState(false);
 
 
     useEffect(() => {
@@ -123,6 +124,12 @@ export const Appointment = () => {
                 // history.push('/profile')
             })
         }
+    }
+    const showTermsConditions = _ => {
+        setIsModalVisible(true);
+    }
+    const closeTermsConditions = _ => {
+        setIsModalVisible(false);
     }
 
     return (
@@ -257,8 +264,24 @@ export const Appointment = () => {
                                 />
                             )
                         }
-                        <div className="alert__error" style={{marginTop: 15}}>
-                            Recuerda que no hay reembolso
+
+                        <div>
+                            <p className="terms" onClick={showTermsConditions}>Términos y condiciones</p>
+                            <Modal 
+                                title="Términos y Condiciones" 
+                                visible={isModalVisible} 
+                                onOk={closeTermsConditions} 
+                                onCancel={closeTermsConditions}
+                                footer={[
+                                    <Button key="submit" type="primary" onClick={closeTermsConditions}>
+                                      Aceptar
+                                    </Button>,
+                                ]}
+                            >
+                                <p>- Si se ausenta a su sesión, no habrá opción a recuperarlo.</p>
+                                <p>- Se podrá cancelar o reprogramar la sesión con 24 horas de anticipación.</p>
+                                <p>- Cada sesión se realiza 1 vez por semana a menos que el especialista modifique la frecuencia de las sesiones con previo aviso.</p>
+                            </Modal>
                         </div>
                         <button 
                             className="button button--primary"

@@ -10,7 +10,7 @@ export const AboutSection = () => {
                         ¿Quienes somos?
                     </h3>
                     <p className="about-section__description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mi nulla, ultrices iaculis tincidunt non, varius sed tellus. Quisque congue quam et ante tempor, id tristique elit convallis. Vestibulum mauris nisi, lacinia quis mollis non, tristique a dolor. Nulla dignissim purus in varius mollis.
+                        Somos especialistas en desarrollo personal, inteligencia emocional, dependencia emocional, motivación, habilidades sociales, liderazgo y relaciones de pareja
                     </p>
                 </div>
                 <div className="about-section__right">
