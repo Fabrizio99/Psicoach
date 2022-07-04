@@ -3,21 +3,24 @@ import { Calendar } from "antd";
 import { Menu, Dropdown } from "antd";
 import moment from "moment";
 
-export const CalendarComponent = ({onChange, calendar}) => {
-  const handlePanel = resp => {
-    onChange({year: resp.year(), month: resp.format('M')})
-  }
-
+export const CalendarComponent = ({ onChange, calendar }) => {
+  const handlePanel = (resp) => {
+    onChange({ year: resp.year(), month: resp.format("M") });
+  };
 
   function getListData(value) {
-    const date = calendar.filter(c => {
-      const parsedDate = c.date.split('T')[0]
-      return moment(parsedDate).isSame(value,'day') &&  moment(parsedDate).isSame(value,'month') &&  moment(parsedDate).isSame(value,'year')
-    })
+    const date = calendar.filter((c) => {
+      const parsedDate = c.date.split("T")[0];
+      return (
+        moment(parsedDate).isSame(value, "day") &&
+        moment(parsedDate).isSame(value, "month") &&
+        moment(parsedDate).isSame(value, "year")
+      );
+    });
 
     let listData;
-    if(date){
-      listData = date.map(d => ({ content: d.name, link: d.link_meet }))
+    if (date) {
+      listData = date.map((d) => ({ content: d.name, link: d.link_meet }));
     }
 
     return listData || [];
@@ -29,11 +32,7 @@ export const CalendarComponent = ({onChange, calendar}) => {
       <Menu>
         {listData.map((item) => (
           <Menu.Item key={item.content} className="calendar-item">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.link}
-            >
+            <a target="_blank" rel="noopener noreferrer" href={item.link}>
               {item.content}
             </a>
           </Menu.Item>
@@ -56,11 +55,7 @@ export const CalendarComponent = ({onChange, calendar}) => {
     );
   }
 
-
   return (
-    <Calendar
-      dateCellRender={dateCellRender}
-      onPanelChange={handlePanel}
-    />
+    <Calendar dateCellRender={dateCellRender} onPanelChange={handlePanel} />
   );
 };
